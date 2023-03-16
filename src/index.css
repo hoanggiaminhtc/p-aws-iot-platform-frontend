@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@layer components {
+  /*Side bar transition on destop */
+  .transitionSideBar {
+    transition: all 0.5s ease;
+  }
+  /* iconPop effect */
+  .iconPopup:hover + .iconShowPopup {
+    visibility: visible;
+  }
+  /* grid table */
+  .gridCustom {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    gap: 32px;
+  }
+  /* Spiner ellipsis */
+  .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #1d4ed8;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+
+  /* Widget class */
+  .widget-btn-delete {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .widget-block:hover .widget-btn-delete {
+    visibility: visible;
+    opacity: 1;
+  }
+  /* hiden scroll bar */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* show btn delete dashboard */
+  .blockSelectDashBoard:hover > span {
+    display: flex;
+  }
+  /*Hover gateway */
+  .gateway {
+    transition: all 0.5s;
+  }
+  .gateway:hover .gateway_text {
+    color: black;
+  }
+  /* Animation introducer in Home Page */
+  .introducer-statistical {
+    opacity: 0;
+    transform: translateX(110%);
+    animation: animationIntroducerHome 1s ease-in-out forwards;
+  }
+  .introducer-welcome {
+    opacity: 0;
+    transform: translateX(110%);
+    animation: animationIntroducerHome 1s ease-in-out 0.5s forwards;
+  }
+  .introducer {
+    opacity: 0;
+    transform: translateX(110%);
+    animation: animationIntroducerHome 1s ease-in-out 1s forwards;
+  }
+  @keyframes animationIntroducerHome {
+    from {
+      opacity: 0;
+      transform: translateX(110%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  /* Animation Modal */
+  .modal-animation {
+    transform: scale(0);
+    animation: animationModal 0.3s linear forwards;
+  }
+  @keyframes animationModal {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  /* Topic Hover Text Copy */
+  .topicTextCopy {
+    transition: all 0.5s;
+  }
+  .topicText:hover .topicTextCopy {
+    opacity: 1;
+  }
+}
