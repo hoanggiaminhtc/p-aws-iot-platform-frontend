@@ -1,0 +1,80 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:249035420652:task-definition/iot-platform-frontend:2",
+  "containerDefinitions": [
+    {
+      "name": "iot_platform_frontend",
+      "image": "249035420652.dkr.ecr.ap-southeast-1.amazonaws.com/iot_platform_frontend:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "entryPoint": [],
+      "command": [],
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/iot-platform-frontend",
+          "awslogs-region": "ap-southeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "iot-platform-frontend",
+  "taskRoleArn": "arn:aws:iam::249035420652:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::249035420652:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 2,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "2048",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-03-06T17:33:43.160Z",
+  "registeredBy": "arn:aws:iam::249035420652:root",
+  "tags": []
+}
