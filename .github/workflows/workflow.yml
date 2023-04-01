@@ -40,8 +40,7 @@ env:
   CONTAINER_NAME: iot_platform_frontend           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
 
-permissions:
-  contents: read
+permissions: write-all
 
 jobs:
   # **************************************************
@@ -49,18 +48,8 @@ jobs:
   # **************************************************
   run-ci:
     # Run on github Ubuntu Linux VM
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/ci.yml
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'latest'
-      - run: npm ci
-        #     - name: Run test
-      # run: npm test
-      - run: npm run build --if-present
 
 
   # **************************************************
@@ -96,11 +85,13 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
-        REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        touch .env
+        echo 'REACT_APP_API_ENDPOINT= "${{ secrets.REACT_APP_API_ENDPOINT }}"' >> .env
+        echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
