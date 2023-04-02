@@ -35,6 +35,13 @@ function App() {
       });
   }, [dispatch, location.pathname]);
 
+  useEffect(() => {
+    const element = document.documentElement;
+    if (localStorage.getItem('theme')) {
+      element.classList.add('dark');
+    }
+  }, []);
+
   const handleErrAuthen = () => {
     dispatch(handleLogout());
     setErrAuthen(false);

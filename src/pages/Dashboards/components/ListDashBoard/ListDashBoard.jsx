@@ -29,13 +29,13 @@ const ListDashBoard = ({
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="py-3 px-6 xs:hidden sm:table-cell">
+              <th scope="col" className="px-6 py-3 xs:hidden sm:table-cell">
                 Created time
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="px-6 py-3">
                 Name
               </th>
-              <th scope="col" className="py-3 px-6"></th>
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +56,7 @@ const ListDashBoard = ({
           </tbody>
         </table>
         {dashBoardList.length === 0 && (
-          <p className="my-4 text-center text-[#000A3D]">
+          <p className="my-4 text-center text-[#000A3D] dark:text-white">
             Không tìm thấy bắt cứ Dashboard nào
           </p>
         )}

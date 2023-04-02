@@ -16,8 +16,10 @@ const SideBarIntroduces = ({
     <div className="w-screen p-12 md:w-full">
       <div className="flex w-full items-center">
         <div className="mr-0 w-full max-w-[500px] text-left md:mr-12">
-          <div className="text-4xl font-medium leading-10">{title}</div>
-          <div className="mt-4 mb-10 text-lg font-medium leading-5 text-[#58666e]">
+          <div className="text-4xl font-medium leading-10 dark:text-white">
+            {title}
+          </div>
+          <div className="mt-4 mb-10 text-lg font-medium leading-5 text-[#58666e] dark:text-white">
             {content}
           </div>
           <ButtonCreateForm
@@ -30,7 +32,7 @@ const SideBarIntroduces = ({
           <img
             src={Background_iot_platform}
             alt="background_iot_platform"
-            className="h-[480px] w-[600px]"
+            className="h-[480px] w-[600px] rounded-lg"
           ></img>
         </div>
       </div>
