@@ -12,7 +12,11 @@ http.interceptors.request.use(
     if (
       config.url === '/auth/login' ||
       config.url === '/auth/register' ||
-      config.url === '/auth/forgetpassword'
+      config.url === '/auth/forgetpassword' ||
+      config.url.includes('/dashboard/getonewidget') ||
+      config.url.includes('/device/telemetry/getdevicedata') ||
+      config.url.includes('/device/telemetry/gettopicdata') ||
+      config.url.includes('/device/telemetry/getdatalastnday')
     ) {
       return config;
     } else {

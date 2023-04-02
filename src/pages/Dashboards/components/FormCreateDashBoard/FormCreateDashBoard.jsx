@@ -42,13 +42,11 @@ const FormCreateDashBoard = ({
   return (
     <Modal>
       <form
-        className="rounded-md bg-white pb-5 xs:w-[95%] sm:w-5/6 md:w-1/2"
+        className="rounded-md bg-white pb-5 dark:bg-[#202124] xs:w-[95%] sm:w-5/6 md:w-1/2"
         onSubmit={formik.handleSubmit}
       >
         <div className="mb-8 flex h-16 items-center justify-between bg-[#132533] text-2xl font-bold text-white">
-          <div className="pl-6">
-            {type === 'update' ? 'Update dashboard' : 'Add a new dashboard'}
-          </div>
+          <div className="pl-6">Dashboard</div>
           <div className="cursor-pointer pr-6" onClick={clickCloseModal}>
             <AiOutlineClose />
           </div>

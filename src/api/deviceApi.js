@@ -1,16 +1,14 @@
 import http from '~/util/http';
 
-export const getDevices = () => {
-  return http.get('/device/getall');
+export const getDevices = (id) => {
+  return http.get(`/device/getall/${id}`);
 };
 
-export const addDevice = (body) => {
-  return http.post('/device/add', body);
+export const addDevice = (body, id) => {
+  return http.post(`/device/add/${id}`, body);
 };
 
 export const deleteDevice = (idDevice) => {
-  console.log('Vao ham xoa thiet bi');
-  console.log('Deviec Id :', idDevice);
   return http.delete(`/device/delete/${idDevice}`);
 };
 

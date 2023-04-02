@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import {
   FaHome,
-  FaRocket,
+  // FaRocket,
   FaTachometerAlt,
   // FaUsers,
   // FaServer,
@@ -13,9 +13,13 @@ import {
   FaCogs,
   FaQuestionCircle,
   FaRoute,
+  FaUsers,
 } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const ListSideBar = ({ hideMenu = false }) => {
+  const { user } = useSelector((select) => select.user);
+
   return (
     <div className="w-full">
       <ul className="border-b-4 border-solid border-[#0C1821] text-sm font-bold text-[#709ABB]">
@@ -25,7 +29,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >
@@ -50,7 +54,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >
@@ -69,7 +73,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             Gateways
           </div>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/devices"
           className={({ isActive }) =>
             `flex ${
@@ -93,14 +97,14 @@ const ListSideBar = ({ hideMenu = false }) => {
           >
             Devices
           </div>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/dashboards"
           className={({ isActive }) =>
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             }  transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >
@@ -193,32 +197,34 @@ const ListSideBar = ({ hideMenu = false }) => {
           >
             Assets
           </div>
-        </NavLink>
-        <NavLink
-          to="/customers"
-          className={({ isActive }) =>
-            `flex ${
-              hideMenu ? 'pl-0' : 'pl-3'
-            } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
-            }`
-          }
-        >
-          <div
-            className={`${
-              hideMenu ? 'h-[50px] w-16' : 'h-10 w-10'
-            } transitionSideBar  flex items-center justify-center font-black leading-10`}
+          </NavLink>*/}
+        {user?.role === 1 && (
+          <NavLink
+            to="/customers"
+            className={({ isActive }) =>
+              `flex ${
+                hideMenu ? 'pl-0' : 'pl-3'
+              } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
+                isActive && 'bg-[#000333] text-white'
+              }`
+            }
           >
-            <FaUsers className="text-[#FFC40D]" />
-          </div>
-          <div
-            className={`transitionSideBar flex items-center justify-center ${
-              hideMenu ? 'hidden' : 'block'
-            }`}
-          >
-            Customers
-          </div>
-        </NavLink> */}
+            <div
+              className={`${
+                hideMenu ? 'h-[50px] w-16' : 'h-10 w-10'
+              } transitionSideBar  flex items-center justify-center font-black leading-10`}
+            >
+              <FaUsers className="text-[#FFC40D]" />
+            </div>
+            <div
+              className={`transitionSideBar flex items-center justify-center ${
+                hideMenu ? 'hidden' : 'block'
+              }`}
+            >
+              Customers
+            </div>
+          </NavLink>
+        )}
       </ul>
       <div
         className={`transitionSideBar py-3 pl-3 text-left text-xs text-[#487497] ${
@@ -234,7 +240,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >
@@ -259,7 +265,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >
@@ -284,7 +290,7 @@ const ListSideBar = ({ hideMenu = false }) => {
             `flex ${
               hideMenu ? 'pl-0' : 'pl-3'
             } transitionSideBar cursor-pointer hover:bg-[#000333] hover:text-white ${
-              isActive && 'bg-[#000333] text-white'
+              isActive && 'rounded-lg bg-[#000333] text-white'
             }`
           }
         >

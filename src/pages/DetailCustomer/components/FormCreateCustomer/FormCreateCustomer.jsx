@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -6,15 +7,14 @@ import * as Yup from 'yup';
 
 import Modal from '~/components/Modal';
 import InputForm from '~/components/UI/InputForm';
+import { register } from '~/api/adminApi';
+import { toast } from 'react-toastify';
 
 const FormCreateCustomer = ({ handleClickCLoseModal }) => {
   const formik = useFormik({
     initialValues: {
       customerFirstName: '',
       customerLastName: '',
-      customerDes: '',
-      customerAddress: '',
-      customerPhoneNumber: '',
       customerEmail: '',
       customerPassword: '',
     },
@@ -25,15 +25,6 @@ const FormCreateCustomer = ({ handleClickCLoseModal }) => {
       customerLastName: Yup.string().required(
         "You must fill customer's last name",
       ),
-      customerDes: Yup.string().required(
-        "You must fill customer's description",
-      ),
-      customerAddress: Yup.string().required(
-        "You must fill customer's address",
-      ),
-      customerPhoneNumber: Yup.string().required(
-        "You must fill customer's phone number",
-      ),
       customerEmail: Yup.string()
         .email('Invalid email')
         .required("You must fill customer's email"),
@@ -42,9 +33,21 @@ const FormCreateCustomer = ({ handleClickCLoseModal }) => {
         .required("You must fill customer's password"),
     }),
     onSubmit: (values) => {
-      console.log({ values });
       //Đây là xử lý tạo khách hàng
-      formik.handleReset();
+      let body = {
+        name: values.customerLastName + ' ' + values.customerFirstName,
+        email: values.customerEmail,
+        password: values.customerPassword,
+      };
+      register(body)
+        .then((user) => {
+          formik.handleReset();
+          handleClickCLoseModal();
+          toast.success('Tạo người dùng thành công');
+        })
+        .catch(() => {
+          toast.error('Tạo người dùng thất bại!');
+        });
     },
   });
 
@@ -54,14 +57,14 @@ const FormCreateCustomer = ({ handleClickCLoseModal }) => {
   };
 
   return (
-    <Modal>
+    <Modal haveAnimation>
       <form
-        className="w-1/2 rounded-md bg-white pb-5"
+        className="w-11/12 overflow-hidden rounded-md bg-white pb-5 dark:bg-[#202124] lg:w-1/2"
         onSubmit={formik.handleSubmit}
       >
         <div className="mb-8 flex h-16 items-center justify-between bg-[#132533] text-2xl font-bold text-white">
-          <div className="pl-6">Add new customer</div>
-          <div className="cursor-pointer pr-6" onClick={clickCloseModal}>
+          <div className="pl-6">Customer</div>
+          <div className="pr-6 cursor-pointer" onClick={clickCloseModal}>
             <AiOutlineClose />
           </div>
         </div>
@@ -84,31 +87,6 @@ const FormCreateCustomer = ({ handleClickCLoseModal }) => {
           />
         </div>
         <div className="px-6">
-          <InputForm
-            nameId="customerDes"
-            name="Customer's description"
-            value={formik.values.customerDes}
-            handleOnChange={formik.handleChange}
-            error={formik.errors.customerDes}
-            touch={formik.touched.customerDes}
-          />
-          <InputForm
-            nameId="customerAddress"
-            name="Customer's address"
-            value={formik.values.customerAddress}
-            handleOnChange={formik.handleChange}
-            error={formik.errors.customerAddress}
-            touch={formik.touched.customerAddress}
-          />
-          <InputForm
-            type="tel"
-            nameId="customerPhoneNumber"
-            name="Customer's phone number"
-            value={formik.values.customerPhoneNumber}
-            handleOnChange={formik.handleChange}
-            error={formik.errors.customerPhoneNumber}
-            touch={formik.touched.customerPhoneNumber}
-          />
           <InputForm
             type="email"
             nameId="customerEmail"
