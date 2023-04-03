@@ -90,7 +90,7 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         touch .env
-        echo 'REACT_APP_API_ENDPOINT= "${{ secrets.REACT_APP_API_ENDPOINT }}"' >> .env
+        echo 'REACT_APP_API_ENDPOINT= ${{ secrets.REACT_APP_API_ENDPOINT }}' >> .env
         echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
