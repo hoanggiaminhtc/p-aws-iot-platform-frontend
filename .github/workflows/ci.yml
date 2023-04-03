@@ -27,7 +27,7 @@
 name: CI-Workflows
 on:
   push:
-    branches-ignore:
+    branches-ignore: [ "develop" ]
   workflow_call:
 jobs:
   setup:
