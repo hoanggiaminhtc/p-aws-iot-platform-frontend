@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { getTokenLocalStorage } from './handleLocalStorage';
-require('dotenv').config();
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_API_ENDPOINT,

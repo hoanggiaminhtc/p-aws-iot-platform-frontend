@@ -1,4 +1,3 @@
-require('dotenv').config();
 export const setTokenLocalStorage = (token) => {
   console.log({ token });
   localStorage.setItem(process.env.REACT_APP_IOT_USER_TOKEN, token);
