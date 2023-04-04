@@ -2,13 +2,15 @@ import axios from 'axios';
 import { getTokenLocalStorage } from './handleLocalStorage';
 
 const http = axios.create({
-  baseURL: process.env.REACT_APP_API_ENDPOINT,
+  baseURL: JSON.stringify(process.env.REACT_APP_API_ENDPOINT),
   headers: { 'Content-Type': 'application/json' },
 });
 
 http.interceptors.request.use(
   function (config) {
-    let token = getTokenLocalStorage(process.env.REACT_APP_IOT_USER_TOKEN);
+    let token = getTokenLocalStorage(
+      JSON.stringify(process.env.REACT_APP_IOT_USER_TOKEN),
+    );
     if (
       config.url === '/auth/login' ||
       config.url === '/auth/register' ||
