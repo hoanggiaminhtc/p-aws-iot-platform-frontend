@@ -39,6 +39,8 @@ env:
   # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: iot_platform_frontend           # set this to the name of the container in the
   # containerDefinitions section of your task definition
+  REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+  REACT_APP_IOT_USER_TOKEN: TOKEN_USER
 
 permissions: write-all
 
@@ -90,9 +92,6 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        touch .env
-        echo 'REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}' >> .env
-        echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
