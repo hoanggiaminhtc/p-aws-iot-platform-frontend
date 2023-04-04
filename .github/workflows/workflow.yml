@@ -80,7 +80,11 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-
+    - name: Touch .env
+      run: |
+        touch .env
+        echo 'REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}' >> .env
+        echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
@@ -90,9 +94,6 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        touch .env
-        echo 'REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}' >> .env
-        echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
