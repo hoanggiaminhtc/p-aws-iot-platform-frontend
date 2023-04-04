@@ -86,12 +86,13 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
-        REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
-        REACT_APP_IOT_USER_TOKEN: ${{ secrets.REACT_APP_IOT_USER_TOKEN }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        touch .env
+        echo 'REACT_APP_API_ENDPOINT=${{ secrets.REACT_APP_API_ENDPOINT }}' >> .env
+        echo 'REACT_APP_IOT_USER_TOKEN=TOKEN_USER' >> .env
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
