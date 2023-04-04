@@ -1,9 +1,14 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
-import http from '~/util/http';
+
+let healthcheck = axios.create({
+  baseURL: process.env.REACT_APP_API_ENDPOINT,
+  headers: { 'Content-Type': 'application/json' },
+});
 
 const HealthCheck = () => {
   useEffect(() => {
-    http
+    healthcheck
       .get('/healthcheck')
       .then(() => {
         console.log('Health check pass');
