@@ -24,11 +24,6 @@ const CustomerDevices = React.lazy(() => import('~/pages/CustomerDevices'));
 const CustomerDevice = React.lazy(() =>
   import('~/pages/CustomerDevices/CustomerDevice'),
 );
-// const DataBuckets = React.lazy(() => import('~/pages/DataBuckets'));
-// const Endpoints = React.lazy(() => import('~/pages/Endpoints'));
-// const Assets = React.lazy(() => import('~/pages/Assets'));
-// const Customers = React.lazy(() => import('~/pages/Customers'));
-// const DetailCustomer = React.lazy(() => import('~/pages/DetailCustomer'));
 const Profile = React.lazy(() => import('~/pages/Profile'));
 const Setting = React.lazy(() => import('~/pages/Setting'));
 const Document = React.lazy(() => import('~/pages/Document'));
@@ -129,6 +124,10 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
+      <Route
+        path="/health"
+        element={<h3>Hey There!!! The App is Healthy</h3>}
+      ></Route>
       {routes.map((route, index) => {
         let Element = route.element;
         return (
