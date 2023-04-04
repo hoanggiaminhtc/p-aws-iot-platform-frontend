@@ -1,15 +1,15 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
+import http from '~/util/http';
 
 const HealthCheck = () => {
   useEffect(() => {
-    axios
+    http
       .get('/healthcheck')
       .then(() => {
         console.log('Health check pass');
       })
       .catch((err) => {
-        console.log('Health check failed');
+        console.log('Health check failed: ', err);
       });
   });
 
