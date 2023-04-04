@@ -17,7 +17,8 @@ function App() {
     if (
       location.pathname === '/log-in' ||
       location.pathname === '/register' ||
-      location.pathname === '/authentication'
+      location.pathname === '/authentication' ||
+      location.pathname === '/health'
     ) {
       return;
     }
