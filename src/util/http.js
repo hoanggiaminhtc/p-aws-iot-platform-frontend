@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getTokenLocalStorage } from './handleLocalStorage';
 
 const http = axios.create({
-  baseURL: JSON.stringify(process.env.REACT_APP_API_ENDPOINT),
+  baseURL: process.env.REACT_APP_API_ENDPOINT,
   headers: { 'Content-Type': 'application/json' },
 });
 
