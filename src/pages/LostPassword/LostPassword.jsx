@@ -9,7 +9,6 @@ import Notification from '~/components/Notification';
 import Spinner from '~/components/UI/Spinner';
 import { forgetPassword } from '~/api/userApi';
 import Auth from '~/components/UI/Auth';
-import { toast } from 'react-toastify';
 
 const LostPassword = () => {
   const [notificationSucess, setNotificationSucess] = useState(null);
