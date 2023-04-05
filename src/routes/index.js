@@ -125,7 +125,9 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
-      <Route path="/health"><h3>OK</h3></Route>
+      <Route path="/health">
+        <h3>OK</h3>
+      </Route>
       {routes.map((route, index) => {
         let Element = route.element;
         return (
