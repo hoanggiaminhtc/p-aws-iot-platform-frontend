@@ -3,8 +3,8 @@ const url = 'http://httpstat.us/200';
 const HealthCheck = () => {
   useEffect(() => {
     fetch(url).then((res) => {
-        return res.json();
-      });
+      return res.json();
+    });
   });
 };
 
