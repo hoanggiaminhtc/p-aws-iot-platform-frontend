@@ -49,8 +49,8 @@ const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [widgetId]);
   return (
-    <div className="relative h-full px-5 widget-block">
-      <div className="flex flex-col items-center justify-center w-full h-full py-10">
+    <div className="widget-block relative h-full px-5">
+      <div className="flex h-full w-full flex-col items-center justify-center py-10 dark:text-white">
         <div
           className={`transition-allborder relative h-10 w-20 cursor-pointer rounded-full border-2 border-solid border-gray-500 shadow-2xl ${
             btn === 'on' ? 'bg-blue-500' : 'bg-gray-500'
@@ -69,7 +69,7 @@ const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
         <div className="absolute top-0 right-0 flex items-center gap-1">
           <div
             // eslint-disable-next-line prettier/prettier
-            className="px-3 py-1 text-xs text-white bg-blue-600 cursor-pointer widget-btn-delete xs:visible xs:opacity-100 md:invisible md:opacity-0"
+            className="widget-btn-delete cursor-pointer bg-blue-600 px-3 py-1 text-xs text-white xs:visible xs:opacity-100 md:invisible md:opacity-0"
             onClick={(e) => {
               e.isPropagationStopped();
               onHandleShareWidget();
@@ -78,7 +78,7 @@ const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
             Share
           </div>
           <div
-            className="px-3 py-1 text-xs text-white bg-red-600 cursor-pointer widget-btn-delete xs:visible xs:opacity-100 md:invisible md:opacity-0"
+            className="widget-btn-delete cursor-pointer bg-red-600 px-3 py-1 text-xs text-white xs:visible xs:opacity-100 md:invisible md:opacity-0"
             onClick={(e) => {
               e.isPropagationStopped();
               onHandleDeleteWidget();

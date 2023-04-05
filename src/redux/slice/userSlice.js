@@ -23,18 +23,6 @@ export const handleLogin = createAsyncThunk(
   },
 );
 
-// export const handleRegister = createAsyncThunk(
-//   'user/register',
-//   async (body, { rejectWithValue }) => {
-//     try {
-//       const res = await register(body);
-//       return res.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data);
-//     }
-//   },
-// );
-
 export const handleAuthentication = createAsyncThunk(
   'user/authentication',
   async (body, { rejectWithValue }) => {
@@ -66,7 +54,6 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(handleLogin.fulfilled, (state, action) => {
-      console.log('Res Login : ', action.payload.data);
       state.user = {
         userName: action.payload.data.userName,
         avatarUrl: action.payload.data.avatarUrl,
@@ -74,14 +61,6 @@ export const userSlice = createSlice({
       };
       setTokenLocalStorage(action.payload.data.token);
     });
-    // builder.addCase(handleRegister.fulfilled, (state, action) => {
-    //   state.user = {
-    //     userName: action.payload.data.userName,
-    //     avatarUrl: action.payload.data.avatarUrl,
-    //   };
-    //   setTokenLocalStorage(action.payload.data.token);
-    //   console.log('Register success');
-    // });
     builder.addCase(handleAuthentication.fulfilled, (state, action) => {
       state.user = {
         userName: action.payload.data.name,

@@ -76,7 +76,6 @@ const Profile = () => {
   useEffect(() => {
     getProfile()
       .then((data) => {
-        console.log(data);
         oldFileAvatar.current = data.data.data.user.avatarurl;
         setAvatar(data.data.data.user.avatarurl || NoneAvatar);
         formik.values.fullName = data.data.data.user.name;

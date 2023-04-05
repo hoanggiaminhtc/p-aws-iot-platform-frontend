@@ -29,7 +29,7 @@ const Dialog = ({ nameBtn, desBtn, handleClickCancel, handeClickDelete }) => {
               {nameBtn}
             </button>
             <button
-              className="mt-4 block w-full rounded-lg bg-gray-200 px-4 py-3 text-sm font-semibold md:order-1 md:mt-0 md:inline-block md:w-auto md:py-2"
+              className="mt-4 block w-full rounded-lg bg-gray-200 px-4 py-3 text-sm font-semibold dark:bg-white dark:text-black md:order-1 md:mt-0 md:inline-block md:w-auto md:py-2"
               onClick={handleClickCancel}
             >
               Hủy

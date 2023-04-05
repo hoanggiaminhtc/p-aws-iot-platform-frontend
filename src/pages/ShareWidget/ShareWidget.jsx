@@ -137,7 +137,7 @@ const ShareWidget = () => {
 
   return (
     <div
-      className={`widget-block relative flex h-screen w-full items-center justify-center border-2 border-black p-2 dark:border-red-700 dark:bg-[#DEDFE1]`}
+      className={`widget-block relative flex h-screen w-full items-center justify-center border-2 border-black p-2 dark:border-red-700 dark:bg-black`}
     >
       {WidgetType === '' ? (
         ''

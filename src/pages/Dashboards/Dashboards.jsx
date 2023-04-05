@@ -109,33 +109,6 @@ const Dashboards = () => {
         handleAddSucess={handleGetDashBoard}
         elementForm={FormCreateDashBoard}
       />
-      {/* <ListDashBoard
-        handleOpenModalDashBoard={handleOpenModalDasboard}
-        dashBoardList={dashBoardList}
-        handleSubmitSearchDashBoard={handleSubmitSearchDashBoard}
-        handleGetDashBoard={handleGetDashBoard}
-      />
-      {openModalDeleteDashBoard && (
-        <Dialog
-          nameBtn="Xóa dashboard"
-          desBtn="Bạn sẽ mất tất cả dữ liệu bằng cách xóa dashboard của mình. Hành
-          động này không thể quay trở lại được."
-          handleClickCancel={() => {
-            handleCloseModalDasboard('delete');
-          }}
-          handeClickDelete={handleDeleteDashboard}
-        />
-      )}
-      {openModalUpdateDashBoard && (
-        <FormCreateDashBoard
-          type="update"
-          initialValue={getNameDashBoard()}
-          handleUpdateDashboard={handleUpdateDashboard}
-          handleClickCLoseModal={() => {
-            handleCloseModalDasboard('update');
-          }}
-        />
-      )} */}
     </div>
   );
 };

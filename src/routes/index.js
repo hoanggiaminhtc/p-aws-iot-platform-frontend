@@ -8,13 +8,10 @@ import PrivateRoute from './PrivateRoute';
 import NotificationAuthen from '~/pages/NotificationAuthen';
 import LogIn from '~/pages/LogIn';
 import LostPassword from '~/pages/LostPassword';
-// import Register from '~/pages/Register';
 import GateWays from '~/pages/GateWays';
 import DeviceList from '~/pages/DeviceList';
-import HealthCheck from './HealthCheck';
 
 const Home = React.lazy(() => import('~/pages/Home'));
-// const Devices = React.lazy(() => import('~/pages/Devices'));
 const DetailDevice = React.lazy(() => import('~/pages/DetailDevice'));
 const Dashboards = React.lazy(() => import('~/pages/Dashboards'));
 const DetailDashboards = React.lazy(() => import('~/pages/DetailDashboards'));
@@ -125,7 +122,6 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
-      <Route path="/health" element={<HealthCheck />}></Route>
       {routes.map((route, index) => {
         let Element = route.element;
         return (

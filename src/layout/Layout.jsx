@@ -4,9 +4,12 @@ import { AiOutlineArrowUp } from 'react-icons/ai';
 import SideBar from './components/SideBar';
 import NavBar from './components/NavBar';
 import Bottom from './components/Bottom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Layout = ({ children }) => {
   const [hideMenu, setHideMenu] = useState(false);
+  const location = useLocation();
 
   const handldeHideMenu = useCallback(() => {
     setHideMenu((pre) => !pre);
@@ -15,6 +18,10 @@ const Layout = ({ children }) => {
   const moveToTop = () => {
     window.scroll(0, 0);
   };
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [location.pathname]);
 
   return (
     <>

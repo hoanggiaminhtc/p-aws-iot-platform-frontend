@@ -6,7 +6,7 @@ const CustomerGateway = ({ gateway }) => {
   return (
     <div key={gateway._id}>
       <ul
-        className="grid grid-cols-3 px-2 py-4 text-left hover:bg-gray-300"
+        className="grid grid-cols-3 px-2 py-4 text-left hover:bg-gray-300 dark:hover:bg-black"
         onClick={() => {
           navigate(`/customer-devices/${gateway._id}`);
         }}

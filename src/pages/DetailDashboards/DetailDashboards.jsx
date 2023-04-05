@@ -146,7 +146,7 @@ const DetailDashboards = () => {
         <span>{slicePathName}/</span>
         <span
           // eslint-disable-next-line prettier/prettier
-          className="text-base cursor-pointer hover:text-blue-600 hover:underline "
+          className="cursor-pointer text-base hover:text-blue-600 hover:underline "
           onClick={(e) => {
             e.stopPropagation();
             setOpendModalCreateDashBoard(true);
@@ -194,7 +194,7 @@ const DetailDashboards = () => {
                     <span className="flex items-center">{dashBoard.name}</span>
                     <span
                       // eslint-disable-next-line prettier/prettier
-                      className="items-center hidden cursor-pointer hover:text-red-600 hover:underline"
+                      className="hidden cursor-pointer items-center hover:text-red-600 hover:underline"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeleteDashBoard(dashBoard._id);
@@ -210,7 +210,9 @@ const DetailDashboards = () => {
           <div className="mt-2 min-h-full bg-white p-6 dark:bg-[#242526]">
             {widgetCategory?.newListButtonWidget.length > 0 && (
               <>
-                <h1 className="text-lg font-bold">Bảng điều khiển</h1>
+                <h1 className="text-lg font-bold dark:text-white">
+                  Bảng điều khiển
+                </h1>
                 <DisplayWidget
                   widgetsListDisplay={widgetCategory.newListButtonWidget}
                   handleDeleteWidget={handleDeleteWidget}
@@ -219,7 +221,9 @@ const DetailDashboards = () => {
             )}
             {widgetCategory?.newListChartWidget.length > 0 && (
               <>
-                <h1 className="mb-1 text-lg font-bold">Bảng giám sát</h1>
+                <h1 className="mb-1 text-lg font-bold dark:text-white">
+                  Bảng giám sát
+                </h1>
                 <DisplayWidget
                   widgetsListDisplay={widgetCategory.newListChartWidget}
                   handleDeleteWidget={handleDeleteWidget}

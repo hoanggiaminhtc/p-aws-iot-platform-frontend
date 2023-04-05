@@ -91,16 +91,6 @@ const DetailDevice = () => {
             name: 'updatedAt',
           },
           {
-            title: 'Gateway Ack',
-            infor:
-              device.gatewayrecognition === true
-                ? "Gateway got device's information"
-                : "Gateway did not get device's information",
-            type: 'text',
-            name: 'gatewayack',
-            color: 'red',
-          },
-          {
             title: 'Connectstatus',
             infor: device.connectstatus,
             type: 'text',
@@ -120,7 +110,8 @@ const DetailDevice = () => {
       if (
         device.name === 'createAt' ||
         device.name === 'gatewayrecognition' ||
-        device.name === 'updatedAt'
+        device.name === 'updatedAt' ||
+        device.name === 'gatewayack'
       ) {
         return;
       }
@@ -163,8 +154,6 @@ const DetailDevice = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
-
-  console.log({ inforDevice });
 
   return (
     <div className="bg-[#F0F3F4] dark:bg-[#202124]">

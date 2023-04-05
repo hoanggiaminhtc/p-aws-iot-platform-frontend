@@ -14,12 +14,12 @@ const CustomerDevices = () => {
   }, [params.id]);
 
   return (
-    <div>
+    <div className="dark:text-white">
       <div className="flex h-12 items-center bg-[#F8F8F8] pl-4 capitalize text-[##333333] dark:bg-[#202124] dark:text-white">
         Customer
       </div>
       <div className="px-10">
-        <ul className="grid grid-cols-3 py-4 text-left text-sm font-semibold text-[#374151]">
+        <ul className="grid grid-cols-3 py-4 text-left text-sm font-semibold text-[#374151] dark:text-white">
           <li>Gateway Name</li>
           <li>Create At</li>
           <li>Connect Status</li>
@@ -27,6 +27,9 @@ const CustomerDevices = () => {
         {customerGateways?.map((gateway) => {
           return <CustomerGateway key={gateway._id} gateway={gateway} />;
         })}
+        {customerGateways?.length === 0 && (
+          <p className="text-center">Gateway rỗng</p>
+        )}
       </div>
     </div>
   );

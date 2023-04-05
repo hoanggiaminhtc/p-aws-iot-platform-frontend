@@ -126,7 +126,7 @@ const LineChart = ({ data, name, deviceName, dateOffset, unit }) => {
 
     listData.current =
       listDataCurren.length === 0
-        ? [0, 0, 0, 0, 0]
+        ? []
         : listDataCurren.map((value) => {
             return value.value;
           });
@@ -134,29 +134,7 @@ const LineChart = ({ data, name, deviceName, dateOffset, unit }) => {
     let labels =
       listDataCurren.length === 0
         ? // eslint-disable-next-line no-sparse-arrays
-          [
-            new Date(new Date() - dateOffset * 4).toLocaleTimeString('en-GB', {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            new Date(new Date() - dateOffset * 3).toLocaleTimeString('en-GB', {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            new Date(new Date() - dateOffset * 2).toLocaleTimeString('en-GB', {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            new Date(new Date() - dateOffset).toLocaleTimeString('en-GB', {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            new Date().toLocaleTimeString('en-GB', {
-              hour: '2-digit',
-              minute: '2-digit',
-            }),
-            ,
-          ]
+          []
         : listDataCurren.map((value) => {
             return value.date;
           });
@@ -191,34 +169,6 @@ const LineChart = ({ data, name, deviceName, dateOffset, unit }) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
-  // let labelSub = useMemo(() => {
-  //   // eslint-disable-next-line no-sparse-arrays
-  //   return [
-  //     new Date(new Date() - dateOffset * 4).toLocaleTimeString('en-GB', {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //     }),
-  //     new Date(new Date() - dateOffset * 3).toLocaleTimeString('en-GB', {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //     }),
-  //     new Date(new Date() - dateOffset * 2).toLocaleTimeString('en-GB', {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //     }),
-  //     new Date(new Date() - dateOffset).toLocaleTimeString('en-GB', {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //     }),
-  //     new Date().toLocaleTimeString('en-GB', {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //     }),
-  //     ,
-  //   ];
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data]);
   const displayUnitTime = useMemo(() => {
     if (dateOffset === TIME_A_WEEK) {
       return '(Day : Hour : Minute)';
@@ -233,7 +183,10 @@ const LineChart = ({ data, name, deviceName, dateOffset, unit }) => {
       {dataSet && (
         <>
           <div className="absolute left-[50%] top-[20px] translate-x-[-50%] text-base">
-            Data : {listData.current[0]}
+            Data :{' '}
+            {listData.current?.length > 0
+              ? listData.current[0]
+              : 'Không có dữ liệu'}
           </div>
           <Line
             options={options}

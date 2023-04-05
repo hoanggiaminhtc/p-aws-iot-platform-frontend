@@ -25,12 +25,12 @@ const ListCustomers = () => {
   };
 
   const handleDeleteCustomer = () => {
-    console.log(`Xóa khách hàng ${idCustomer.current} thành công`);
     deleteCustomer(idCustomer.current)
       .then((data) => {
         getListCustomers();
         idCustomer.current = null;
         setOpenModalDeleteCustomer(false);
+        toast.success('Xóa người dùng thành công');
       })
       .catch((err) => {
         toast.error('Xóa người dùng thất bại');
@@ -51,16 +51,16 @@ const ListCustomers = () => {
   }, []);
 
   return (
-    <div>
+    <div className="dark:text-white">
       <div className="flex h-11 items-center bg-[#F6F8F8] pl-2 text-base dark:bg-[#202124] dark:text-white">
         Customer List
         <FaListAlt className="ml-2 text-[#98A6AD]" />
       </div>
       <div className="relative mx-4">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
+          <thead className="text-xs uppercase text-gray-700 dark:text-white">
             <tr>
-              <th scope="col" className="hidden px-6 py-3 md:inline-block">
+              <th scope="col" className="hidden px-6 py-3 lg:inline-block">
                 Created time
               </th>
               <th scope="col" className="px-1 py-3 md:px-6">
@@ -92,6 +92,9 @@ const ListCustomers = () => {
             })}
           </tbody>
         </table>
+        {listCustomers?.length === 0 && (
+          <p className="text-center dark:text-white">Khách hàng rỗng</p>
+        )}
       </div>
       <button
         onClick={() => {

@@ -15,11 +15,11 @@ const CustomerDevice = () => {
   }, [params.id]);
 
   return (
-    <div className="px-10">
+    <div className="px-10 dark:text-white">
       <ul className="grid grid-cols-3 py-4 text-left text-sm font-semibold text-[#374151] dark:text-white">
         <li>Device Name</li>
         <li>Create At</li>
-        <li>Device Recognition</li>
+        <li>Device Connect Status</li>
       </ul>
       {devices.map((device) => {
         return (
@@ -29,10 +29,11 @@ const CustomerDevice = () => {
           >
             <li>{device.name}</li>
             <li>{new Date(device.createdAt).toLocaleDateString('en-GB')}</li>
-            <li>{device.connectstatus ? 'Recognition' : 'Not Recognition'}</li>
+            <li>{device.connectstatus ? 'Connecting' : 'Not Connected'}</li>
           </ul>
         );
       })}
+      {devices?.length === 0 && <p className="text-center">Thiết bị rỗng</p>}
     </div>
   );
 };

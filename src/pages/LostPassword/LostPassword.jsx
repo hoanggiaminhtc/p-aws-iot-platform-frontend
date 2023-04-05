@@ -9,6 +9,7 @@ import Notification from '~/components/Notification';
 import Spinner from '~/components/UI/Spinner';
 import { forgetPassword } from '~/api/userApi';
 import Auth from '~/components/UI/Auth';
+import { toast } from 'react-toastify';
 
 const LostPassword = () => {
   const [notificationSucess, setNotificationSucess] = useState(null);
@@ -51,7 +52,7 @@ const LostPassword = () => {
     <Auth>
       <div className="flex h-screen w-screen items-center justify-center bg-[#F0F3F4]">
         <form
-          className="w-full max-w-md rounded bg-white py-10 px-6"
+          className="w-full max-w-md rounded bg-white px-6 py-10"
           onSubmit={formik.handleSubmit}
         >
           <img
@@ -66,7 +67,7 @@ const LostPassword = () => {
             It happens to the best of us! Enter your email address to recive
             instructions on how to reset your password
           </p>
-          <div className="mb-6 mt-2">
+          <div className="mt-2 mb-6">
             <label
               htmlFor="email"
               className="mb-2 block text-base font-bold text-gray-900 "

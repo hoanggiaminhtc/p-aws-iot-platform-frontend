@@ -5,7 +5,7 @@ const Introducer = ({ title, des, imgLink, flexReverse = false, linkTo,linkToRea
   return (
     <div className="px-3 introducer mt-14 md:px-8">
       {
-        linkTo ? <Link to={linkTo} className="mb-6 text-xl font-bold text-[#000A3D] dark:text-[#2E89FF] sm:text-2xl md:mb-12">{title}</Link> : <h4 className="mb-6 text-xl font-bold text-[#000A3D] dark:text-[#2E89FF] sm:text-2xl md:mb-12">
+        linkTo ? <Link to={linkTo} className="mb-6 text-xl font-bold text-[#000A3D] dark:text-[#2E89FF] sm:text-2xl md:mb-12 block">{title}</Link> : <h4 className="mb-6 text-xl font-bold text-[#000A3D] dark:text-[#2E89FF] sm:text-2xl md:mb-12">
         {title}
       </h4>
       }
