@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-const url = 'http://httpstat.us/200';
+const url = 'https://httpstat.us/200';
 const HealthCheck = () => {
   useEffect(() => {
     fetch(url).then((res) => {
-      return res.json();
+      return JSON.stringify(res.json());
     });
   });
 };
 
 export default HealthCheck;
+
