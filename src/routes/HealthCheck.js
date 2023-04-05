@@ -9,4 +9,3 @@ const HealthCheck = () => {
 };
 
 export default HealthCheck;
-
