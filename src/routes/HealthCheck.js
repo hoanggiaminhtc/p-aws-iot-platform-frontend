@@ -3,10 +3,14 @@ const url = 'https://httpstat.us/200';
 const HealthCheck = () => {
   useEffect(() => {
     fetch(url).then((res) => {
-      console.log(JSON.stringify(res.json()));
+      res.writeHead(200, {
+        'Content-Type': 'text/plain',
+        'Content-Length': 2,
+      });
+      res.write('OK');
+      res.end();
     });
   });
-  return <div></div>;
 };
 
 export default HealthCheck;

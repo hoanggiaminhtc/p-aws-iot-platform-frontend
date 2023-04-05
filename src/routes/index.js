@@ -11,7 +11,7 @@ import LostPassword from '~/pages/LostPassword';
 // import Register from '~/pages/Register';
 import GateWays from '~/pages/GateWays';
 import DeviceList from '~/pages/DeviceList';
-//import HealthCheck from './HealthCheck';
+import HealthCheck from './HealthCheck';
 
 const Home = React.lazy(() => import('~/pages/Home'));
 // const Devices = React.lazy(() => import('~/pages/Devices'));
@@ -125,16 +125,7 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
-      <Route path="/health">
-        <html>
-          <head>
-            <title>Health Check</title>
-          </head>
-          <body>
-            <h1>Health Check</h1>
-          </body>
-        </html>
-      </Route>
+      <Route path="/health" element={<HealthCheck />}></Route>
       {routes.map((route, index) => {
         let Element = route.element;
         return (
