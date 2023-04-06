@@ -3,11 +3,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { turnOn, turnOff } from '~/api/widgetApi';
 import { getDevice } from '~/api/deviceApi';
 import { toast } from 'react-toastify';
+import Modal from '../Modal/Modal';
+import Notification from '../Notification/Notification';
 
 const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
   const statusBtn = useRef(null);
   const [btn, setBtn] = useState('off');
   const [nameDevice, setNameDevice] = useState('');
+  const [modalCopyLink, setModalCopyLink] = useState(false);
 
   useEffect(() => {
     getDevice(deviceId)
@@ -36,10 +39,7 @@ const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
   };
 
   const onHandleShareWidget = () => {
-    navigator.clipboard.writeText(
-      window.location.origin + `/share/${widgetId}`,
-    );
-    toast.success('Copy link share thành công');
+    setModalCopyLink(true);
   };
 
   useEffect(() => {
@@ -87,6 +87,21 @@ const ButtonWidget = ({ widgetId, onHandleDeleteWidget, deviceId }) => {
             Delete
           </div>
         </div>
+      )}
+      {modalCopyLink === true && (
+        <Modal>
+          <Notification
+            success={true}
+            btnName="Quay lại trang"
+            textTitle="Lấy link share thành công"
+            textContent={`Link share : ${
+              window.location.origin + '/share/' + widgetId
+            }`}
+            handleClick={() => {
+              setModalCopyLink(false);
+            }}
+          ></Notification>
+        </Modal>
       )}
     </div>
   );

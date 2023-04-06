@@ -64,7 +64,7 @@ const FormCreateCustomer = ({ handleClickCLoseModal }) => {
       >
         <div className="mb-8 flex h-16 items-center justify-between bg-[#132533] text-2xl font-bold text-white">
           <div className="pl-6">Customer</div>
-          <div className="pr-6 cursor-pointer" onClick={clickCloseModal}>
+          <div className="cursor-pointer pr-6" onClick={clickCloseModal}>
             <AiOutlineClose />
           </div>
         </div>

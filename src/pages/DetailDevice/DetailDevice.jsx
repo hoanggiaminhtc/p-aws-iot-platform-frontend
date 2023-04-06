@@ -61,6 +61,12 @@ const DetailDevice = () => {
         // Set dữ liệu device
         setInforDevice([
           {
+            title: 'Serial number',
+            infor: device.serialnumber,
+            type: 'input',
+            name: 'serialnumber',
+          },
+          {
             title: 'Device Name',
             infor: device.name,
             type: 'input',
@@ -110,8 +116,7 @@ const DetailDevice = () => {
       if (
         device.name === 'createAt' ||
         device.name === 'gatewayrecognition' ||
-        device.name === 'updatedAt' ||
-        device.name === 'gatewayack'
+        device.name === 'updatedAt'
       ) {
         return;
       }
@@ -162,18 +167,18 @@ const DetailDevice = () => {
           Device Details
         </div>
         <div className="min-h-full w-screen bg-white px-3 dark:bg-[#242526] md:w-full">
-          <div className="grid grid-cols-1 gap-1 sm:gridCustom">
+          <div className="sm:gridCustom grid grid-cols-1 gap-1">
             <div className="hidden md:block"></div>
             <div className="flex items-center py-5 text-base font-bold leading-5 text-black dark:text-white">
               <FaInfoCircle className="mr-1" />
               Device Information
             </div>
           </div>
-          <div className="grid grid-cols-2 my-4 text-base sm:gridCustom">
+          <div className="sm:gridCustom my-4 grid grid-cols-2 text-base">
             <div className="flex items-start justify-start text-black dark:text-white sm:justify-end">
               <div className="flex items-center font-bold sm:font-normal">
                 Gateway Name
-                <FaInfoCircle className="hidden ml-1 sm:block" />
+                <FaInfoCircle className="ml-1 hidden sm:block" />
               </div>
             </div>
             <select
@@ -206,9 +211,9 @@ const DetailDevice = () => {
               />
             );
           })}
-          <div className="justify-end w-full mt-14 sm:flex">
+          <div className="mt-14 w-full justify-end sm:flex">
             <div
-              className="px-5 py-2 mb-4 text-center text-white bg-blue-700 rounded-sm cursor-pointer hover:bg-blue-800 sm:mb-0 sm:mr-2 sm:w-auto"
+              className="mb-4 cursor-pointer rounded-sm bg-blue-700 px-5 py-2 text-center text-white hover:bg-blue-800 sm:mb-0 sm:mr-2 sm:w-auto"
               onClick={() => {
                 window.open('http://192.168.4.1/');
               }}
