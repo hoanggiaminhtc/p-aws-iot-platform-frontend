@@ -43,7 +43,7 @@ http.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     if (error.response.data.message === 'jwt expired') {
-      window.location = 'http://localhost:3000/authentication';
+      window.location = window.location.hostname+'/authentication';
     }
     return Promise.reject(error);
   },
