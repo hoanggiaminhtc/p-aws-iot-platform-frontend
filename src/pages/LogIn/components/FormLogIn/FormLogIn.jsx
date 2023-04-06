@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -84,22 +84,6 @@ const FormLogIn = () => {
           )}
         </div>
         <div className="flex items-start">
-          {/* <div className="flex items-start">
-            <div className="flex h-5 items-center">
-              <input
-                id="remember"
-                type="checkbox"
-                value=""
-                className="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 "
-              ></input>
-            </div>
-            <label
-              htmlFor="remember"
-              className="ml-2 text-sm font-medium text-gray-900 "
-            >
-              Remember me
-            </label>
-          </div> */}
           <div></div>
           <a
             href="/lost-password"
@@ -120,12 +104,6 @@ const FormLogIn = () => {
             Login
           </button>
         )}
-        <div className="text-sm font-medium text-gray-500 ">
-          Not registered?{' '}
-          <Link to={'/register'} className="text-blue-700 hover:underline ">
-            Create account
-          </Link>
-        </div>
       </form>
       <ToastContain />
     </Fragment>

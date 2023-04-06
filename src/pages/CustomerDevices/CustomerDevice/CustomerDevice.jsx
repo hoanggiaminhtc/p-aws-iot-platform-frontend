@@ -29,7 +29,7 @@ const CustomerDevice = () => {
           >
             <li>{device.name}</li>
             <li>{new Date(device.createdAt).toLocaleDateString('en-GB')}</li>
-            <li>{device.connectstatus ? 'Connecting' : 'Not Connected'}</li>
+            <li>{device.connectstatus}</li>
           </ul>
         );
       })}
