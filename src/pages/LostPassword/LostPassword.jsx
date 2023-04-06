@@ -95,12 +95,6 @@ const LostPassword = () => {
               <Spinner></Spinner>
             </div>
           )}
-          <div className="mt-6 text-center text-base">
-            Need an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Register
-            </a>
-          </div>
           <div className="mt-2 text-center text-base">
             Suddenly remembered?{' '}
             <a href="/log-in" className="text-blue-600 hover:underline">
