@@ -12,7 +12,15 @@ const SELECT_WIDGET = {
   Table: DashBoardTable,
   LineChart: LineChart,
 };
-const Widget = ({type, name, deviceId, onHandleDeleteWidget, height, widgetId, unit,}) => {
+const Widget = ({
+  type,
+  name,
+  deviceId,
+  onHandleDeleteWidget,
+  height,
+  widgetId,
+  unit,
+}) => {
   const WidgetType = SELECT_WIDGET[type];
   let getDataWidget = useRef();
   const [data, setData] = useState(0);
