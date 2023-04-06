@@ -1,34 +1,24 @@
 import { useEffect, useState, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { getDevice } from '~/api/deviceApi';
 // getDataTopic,
 import { getDataLastNDay } from '~/api/telemetryApi';
 import LineChart from '~/components/Charts/LineChart';
 import DashBoardCart from '~/components/DashBoardCart';
 import DashBoardTable from '~/components/DashBoardTable';
-import Modal from '~/components/Modal/Modal';
-import Notification from '~/components/Notification/Notification';
 
 const SELECT_WIDGET = {
   Card: DashBoardCart,
   Table: DashBoardTable,
   LineChart: LineChart,
 };
-const Widget = ({
-                  type,
-                  name,
-                  deviceId,
-                  onHandleDeleteWidget,
-                  height,
-                  widgetId,
-                  unit,
-                }) => {
+const Widget = ({type, name, deviceId, onHandleDeleteWidget, height, widgetId, unit,}) => {
   const WidgetType = SELECT_WIDGET[type];
   let getDataWidget = useRef();
   const [data, setData] = useState(0);
   const [deviceName, setDeviceName] = useState('Device');
   const [dataInTime, setDataInTime] = useState('0');
   const dateOffset = useRef(60 * 1000 * 5);
-  const [modalCopyLink, setModalCopyLink] = useState(false);
   useEffect(() => {
     if (getDataWidget.current) {
       clearInterval(getDataWidget.current);
@@ -48,7 +38,7 @@ const Widget = ({
               setData(data.data.data.telemetry.reverse());
             },
           );
-        }, 2000);
+        }, 5000);
         break;
       case '1h':
         getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then((data) => {
@@ -105,7 +95,10 @@ const Widget = ({
   };
 
   const onHandleShareWidget = () => {
-    setModalCopyLink(true);
+    navigator.clipboard.writeText(
+      window.location.origin + `/share/${widgetId}`,
+    );
+    toast.success('Copy link share thành công');
   };
 
   return (
@@ -122,7 +115,7 @@ const Widget = ({
       <div className="absolute top-0 right-0 flex gap-1">
         <div
           // eslint-disable-next-line prettier/prettier
-          className="widget-btn-delete cursor-pointer bg-blue-600 px-3 py-1 text-xs text-white xs:visible xs:opacity-100 md:invisible md:opacity-0"
+          className="px-3 py-1 text-xs text-white bg-blue-600 cursor-pointer widget-btn-delete xs:visible xs:opacity-100 md:invisible md:opacity-0"
           onClick={(e) => {
             e.isPropagationStopped();
             onHandleShareWidget();
@@ -132,7 +125,7 @@ const Widget = ({
         </div>
         <div
           // eslint-disable-next-line prettier/prettier
-          className="widget-btn-delete cursor-pointer bg-red-600 px-3 py-1 text-xs text-white xs:visible xs:opacity-100 md:invisible md:opacity-0"
+          className="px-3 py-1 text-xs text-white bg-red-600 cursor-pointer widget-btn-delete xs:visible xs:opacity-100 md:invisible md:opacity-0"
           onClick={(e) => {
             e.isPropagationStopped();
             onHandleDeleteWidget();
@@ -143,12 +136,12 @@ const Widget = ({
       </div>
       {type !== 'Card' && (
         // eslint-disable-next-line prettier/prettier
-        <div className="absolute top-0 left-0 cursor-pointer px-3 py-1 text-xs text-white">
+        <div className="absolute top-0 left-0 px-3 py-1 text-xs text-white cursor-pointer">
           <select
             name="data-in-day"
             id="data-in-day"
             // eslint-disable-next-line prettier/prettier
-            className="w-40 border border-solid border-black py-1 text-black outline-none"
+            className="w-40 py-1 text-black border border-black border-solid outline-none"
             onChange={handleChangeDataInTime}
           >
             <option value="0">Recently</option>
@@ -157,21 +150,6 @@ const Widget = ({
             <option value="1w">A week ago</option>
           </select>
         </div>
-      )}
-      {modalCopyLink === true && (
-        <Modal>
-          <Notification
-            success={true}
-            btnName="Quay lại trang"
-            textTitle="Lấy link share thành công"
-            textContent={`Link share : ${
-              window.location.origin + '/share/' + widgetId
-            }`}
-            handleClick={() => {
-              setModalCopyLink(false);
-            }}
-          ></Notification>
-        </Modal>
       )}
     </div>
   );
