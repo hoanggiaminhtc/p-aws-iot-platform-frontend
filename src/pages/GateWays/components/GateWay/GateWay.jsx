@@ -1,21 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteGateWay } from '~/api/gateWayApi';
-// import GatewaysImg from '~/assets/image/gateways.png';
-// import GatewayImg from '~/assets/image/Gateway.png';
 import { TbRouter } from 'react-icons/tb';
 
 const GateWay = ({ getway, getRepeatGetWay, timeDelay }) => {
   const [openBtnDelete, setOpenBtnDelete] = useState(false);
-  // const [openModalDelete, setOpenModalDelete] = useState(false);
-
-  // const handleOpenModalDelete = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   setOpenModalDelete(true);
-  // };
 
   const handleDeleteGateWay = (idGateWay) => {
     deleteGateWay(idGateWay)

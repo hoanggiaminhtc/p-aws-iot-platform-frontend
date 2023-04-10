@@ -48,7 +48,7 @@ const Home = () => {
       <div className="grid grid-cols-1 gap-4 bg-[#faf9f9] p-4 dark:bg-[#202124] sm:grid-cols-2 md:grid-cols-4">
         <div className="introducer-statistical h-20 rounded-md border-[3px] border-solid border-[#000A3D] bg-[#000A3D] text-white hover:border-[#000A3D] dark:bg-[#2E89FF]">
           <div className="text-sm font-bold leading-7 text-center">
-            Total Gateways
+            Gateways
           </div>
           <div className="flex items-center justify-center text-2xl font-bold leading-8">
             <span className="flex items-center justify-center w-10 h-8">
@@ -99,7 +99,7 @@ const Home = () => {
                 flexReverse={introducer.flexReverse}
                 linkTo={introducer.linkTo}
                 linkToRead={introducer.linkToRead}
-              
+
               />
             );
           })}

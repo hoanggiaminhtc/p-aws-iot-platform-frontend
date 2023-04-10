@@ -1,8 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getGateWayList } from '~/api/gateWayApi';
-// import NoGateWayImg from '~/assets/image/no-gateways.png';
 import FormCreateGateway from './components/FormCreateGateway';
 import GateWay from './components/GateWay';
 import { BiWifiOff } from 'react-icons/bi';

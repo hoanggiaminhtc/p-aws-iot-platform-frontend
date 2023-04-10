@@ -101,7 +101,7 @@ const DetailDevice = () => {
             infor: device.connectstatus,
             type: 'text',
             name: 'connectstatus',
-            color: 'red',
+            color: device.connectstatus === 'Not Connected' ? 'red' : 'green',
           },
         ]);
       })

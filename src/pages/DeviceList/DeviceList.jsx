@@ -66,7 +66,10 @@ const DeviceList = () => {
               infor: data.data.data.gatewayinfo[0].connectstatus,
               type: 'text',
               name: 'connectstatus',
-              color: 'red',
+              color:
+                data.data.data.gatewayinfo[0].connectstatus === 'Connected'
+                  ? 'green'
+                  : 'red',
             },
           ]);
         }
@@ -178,7 +181,10 @@ const DeviceList = () => {
                 infor: data.data.data.gatewayinfo[0].connectstatus,
                 type: 'text',
                 name: 'connectstatus',
-                color: 'red',
+                color:
+                  data.data.data.gatewayinfo[0].connectstatus === 'Connected'
+                    ? 'green'
+                    : 'red',
               },
             ]);
           }

@@ -13,7 +13,13 @@ const CustomerGateway = ({ gateway }) => {
       >
         <li>{gateway.name}</li>
         <li>{new Date(gateway.createdAt).toLocaleDateString('en-GB')}</li>
-        <li>{gateway.connectstatus}</li>
+        <li
+          style={{
+            color: gateway.connectstatus === 'Not Connected' ? 'red' : 'green',
+          }}
+        >
+          {gateway.connectstatus}
+        </li>
       </ul>
     </div>
   );
