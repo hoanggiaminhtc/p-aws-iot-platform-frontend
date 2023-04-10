@@ -37,15 +37,13 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && npm run build:heathcheck",
+    "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
     "prettier": "prettier --check \"src/**/(**.jsx|*.js|*.scss|*.css)\"",
-    "prettier:fix": "prettier --write \"src/**/(**.jsx|*.js|*.scss|*.css)\"",
-    "build:heathcheck": "echo '<!DOCTYPE html>\n<html>\n<head>\n  <title>Health Check</title>\n</head>\n<body>\n<h1>Health Check</h1>\n</body>\n</html' >> build/healthcheck.html"
-
+    "prettier:fix": "prettier --write \"src/**/(**.jsx|*.js|*.scss|*.css)\""
   },
   "jest": {
     "moduleNameMapper": {

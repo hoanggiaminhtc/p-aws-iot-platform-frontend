@@ -18,6 +18,7 @@ function App() {
       location.pathname === '/log-in' ||
       location.pathname === '/register' ||
       location.pathname === '/authentication' ||
+      location.pathname === '/lost-password' ||
       location.pathname === '/health'
     ) {
       return;
@@ -25,7 +26,6 @@ function App() {
     dispatch(handleAuthentication())
       .unwrap()
       .catch((err) => {
-        console.log(err);
         if (
           err.message &&
           err.message !== 'jwt expired' &&

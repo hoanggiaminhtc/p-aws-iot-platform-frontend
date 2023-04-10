@@ -5,7 +5,7 @@ export const login = (body) => {
 };
 
 export const forgetPassword = (email) => {
-  return http.post('/auth/forgetpassword', { email });
+  return http.post('/auth/resetpassword', { email });
 };
 
 export const changePassword = (body) => {

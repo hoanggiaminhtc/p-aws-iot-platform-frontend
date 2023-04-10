@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-
+import { forgetPassword } from '~/api/userApi';
 import BackgroundTitle from '~/assets/image/background_title.jpg';
 import Modal from '~/components/Modal';
 import Notification from '~/components/Notification';
-import Spinner from '~/components/UI/Spinner';
-import { forgetPassword } from '~/api/userApi';
 import Auth from '~/components/UI/Auth';
+import Spinner from '~/components/UI/Spinner';
 
 const LostPassword = () => {
   const [notificationSucess, setNotificationSucess] = useState(null);
@@ -96,12 +95,6 @@ const LostPassword = () => {
               <Spinner></Spinner>
             </div>
           )}
-          <div className="mt-6 text-center text-base">
-            Need an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Register
-            </a>
-          </div>
           <div className="mt-2 text-center text-base">
             Suddenly remembered?{' '}
             <a href="/log-in" className="text-blue-600 hover:underline">
