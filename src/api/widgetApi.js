@@ -1,7 +1,7 @@
 import http from '~/util/http';
 
 export const getListWidget = () => {
-  return http.get('/dashboard/listWidgets');
+  return http.get('/widget/listWidgets');
 };
 
 export const getWidgets = (idDashboard) => {
@@ -9,20 +9,20 @@ export const getWidgets = (idDashboard) => {
 };
 
 export const getOneWidget = (widgetId) => {
-  return http.get(`/dashboard/getonewidget/${widgetId}`);
+  return http.get(`/widget/getonewidget/${widgetId}`);
 };
 
 export const addWidget = (body) => {
-  return http.post('/dashboard/addwidget', body);
+  return http.post('/widget/addwidget', body);
 };
 
 export const deleteWidget = (idWidget) => {
-  return http.delete(`/dashboard/deletewidget/${idWidget}`);
+  return http.delete(`/widget/deletewidget/${idWidget}`);
 };
 
 export const turnOn = (widgetId) => {
-  return http.get(`/dashboard/gpiohigh/${widgetId}`);
+  return http.get(`/widget/gpiohigh/${widgetId}`);
 };
 export const turnOff = (widgetId) => {
-  return http.get(`/dashboard/gpiolow/${widgetId}`);
+  return http.get(`/widget/gpiolow/${widgetId}`);
 };

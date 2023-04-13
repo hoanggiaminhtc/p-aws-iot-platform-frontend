@@ -50,7 +50,6 @@ const ShareWidget = () => {
             },
           );
           getDataWidget.current = setInterval(() => {
-            console.log('Case 0');
             getDataLastNDay({ deviceId: deviceId, date: 1800000 }).then(
               (data) => {
                 setData(data.data.data.telemetry.reverse());
@@ -59,7 +58,6 @@ const ShareWidget = () => {
           }, 2000);
           break;
         case '1h':
-          console.log('Case 1h');
           getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
             (data) => {
               dateOffset.current = 60 * 1000 * 15;
@@ -76,7 +74,6 @@ const ShareWidget = () => {
           }, 3600000);
           break;
         case '1d':
-          console.log('Case 1d');
           getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
             (data) => {
               dateOffset.current = 60 * 1000 * 360;
@@ -84,7 +81,6 @@ const ShareWidget = () => {
             },
           );
           getDataWidget.current = setInterval(() => {
-            console.log('Case 1d');
             getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
               (data) => {
                 setData(data.data.data.telemetry.reverse());
