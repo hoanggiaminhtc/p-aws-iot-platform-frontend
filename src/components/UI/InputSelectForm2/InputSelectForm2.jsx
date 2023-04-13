@@ -37,13 +37,13 @@ const InputSelectForm2 = ({
   return (
     <div className="mb-7">
       <div
-        className={`relative flex w-full cursor-pointer justify-between rounded-lg border border-gray-500 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 ${
+        className={`relative flex w-full cursor-pointer justify-between rounded-lg border border-gray-500 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-[#202124] dark:text-white ${
           disable && 'pointer-events-none'
         }`}
         onClick={handleClickOpenSelect}
       >
         <div>{valueInput === '' ? title : inputChoose}</div>
-        <div>
+        <div className="dark:text-white">
           <svg
             className="ml-2 h-4 w-4"
             aria-hidden="true"
@@ -63,7 +63,7 @@ const InputSelectForm2 = ({
         <ul
           className={`absolute ${
             option ? 'top-[calc(100%_+_2px)]' : 'top-full'
-          } left-0 right-0 z-10 hidden max-h-32 overflow-y-auto border-l-2 border-r-2 border-b-2 border-solid border-gray-400 bg-white text-base text-gray-700`}
+          } left-0 right-0 z-10 hidden max-h-32 overflow-y-auto border-l-2 border-r-2 border-b-2 border-solid border-gray-400 bg-white text-base text-gray-700 dark:bg-[#202124] dark:text-white`}
           ref={ulRef}
         >
           {option?.map((data, index) => {
@@ -71,7 +71,7 @@ const InputSelectForm2 = ({
               <li
                 key={index}
                 onClick={(e) => handleClick(e, name, data.value)}
-                className="cursor-pointer py-1 pl-2.5 hover:bg-gray-300"
+                className="cursor-pointer py-1 pl-2.5 hover:bg-gray-300 dark:hover:bg-black"
               >
                 {data.name}
               </li>

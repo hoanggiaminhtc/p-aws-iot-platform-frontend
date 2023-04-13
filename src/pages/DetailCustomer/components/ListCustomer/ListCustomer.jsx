@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaListAlt } from 'react-icons/fa';
-
-import FormSearch from '~/components/FormSearch';
-import Customer from './Customer';
+import Customer from '';
 
 const ListCustomer = ({ handleOpenModalDeleteCustomer }) => {
   const listCustomers = [
@@ -17,29 +15,29 @@ const ListCustomer = ({ handleOpenModalDeleteCustomer }) => {
 
   return (
     <div>
-      <div className="mx-4 flex h-11 items-center bg-[#F6F8F8] pl-2 text-base">
+      <div className="mx-4 flex h-11 items-center bg-[#F6F8F8] pl-2 text-base dark:bg-[#202124] dark:text-white">
         Customer List
         <FaListAlt className="ml-2 text-[#98A6AD]" />
       </div>
-      <div className="my-1 flex justify-end">
-        <div className="mr-4 w-1/3">
+      {/* <div className="flex justify-end my-1">
+        <div className="w-1/3 mr-4">
           <FormSearch></FormSearch>
         </div>
-      </div>
+      </div> */}
       <div className="relative mx-4">
         <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
           <thead className="text-xs uppercase text-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="px-6 py-3">
                 Created time
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="px-6 py-3">
                 Name
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="px-6 py-3">
                 Address
               </th>
-              <th scope="col" className="py-3 px-6"></th>
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>

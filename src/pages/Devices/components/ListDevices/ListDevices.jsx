@@ -13,7 +13,7 @@ const ListDevices = ({
 }) => {
   return (
     <div className="w-screen md:w-full">
-      <div className="flex h-11 items-center bg-[#F6F8F8] px-4 text-base">
+      <div className="flex h-11 items-center bg-[#F6F8F8] px-4 text-base dark:bg-[#202124] dark:text-white">
         Device List
         <FaListAlt className="ml-2 text-[#98A6AD]" />
       </div>
@@ -29,16 +29,16 @@ const ListDevices = ({
       )}
       <div className="relative mx-4">
         <table className="w-full text-left text-sm text-gray-500 ">
-          <thead className="text-xs uppercase text-gray-700 ">
+          <thead className="text-xs uppercase text-gray-700 dark:text-white">
             <tr>
-              <th className="py-3 px-6 xs:hidden md:table-cell">
+              <th className="px-6 py-3 xs:hidden md:table-cell">
                 Created time
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="px-6 py-3">
                 Name
               </th>
-              <th className="py-3 px-6">Type</th>
-              <th className="py-3 px-6"></th>
+              <th className="px-6 py-3">Type</th>
+              <th className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +60,7 @@ const ListDevices = ({
           </tbody>
         </table>
         {deviceList.length === 0 && (
-          <p className="my-4 text-center text-[#000A3D]">
+          <p className="my-4 text-center text-[#000A3D] dark:text-white">
             Không tìm thấy bắt cứ Device nào
           </p>
         )}

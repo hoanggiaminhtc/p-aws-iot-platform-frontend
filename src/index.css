@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
@@ -78,6 +81,19 @@ body {
   }
 
   /* Widget class */
+  .animationToTop {
+    animation: animationToTop linear forwards;
+  }
+  @keyframes animationToTop {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   .widget-btn-delete {
     visibility: hidden;
     opacity: 0;
@@ -145,11 +161,37 @@ body {
       transform: scale(1);
     }
   }
+  /* Animation Delete Btn Gateway */
+  .animationModal2 {
+    animation: animationModal2 0.5s ease-in-out 1 forwards;
+  }
+  @keyframes animationModal2 {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   /* Topic Hover Text Copy */
   .topicTextCopy {
     transition: all 0.5s;
   }
   .topicText:hover .topicTextCopy {
     opacity: 1;
+  }
+  /* boxshadow with buttonWidget */
+  .button-widget_boxshadow {
+    transition: 0.2s;
+    border: 5px solid red;
+    box-shadow: 0 10px 0 red, inset 0 -5px 5px #ee6767b6, 0 20px 0 #808080e8,
+      0 15px 0px 20px white, 0 0 30px 30px #ff000058;
+  }
+  .button-widget_boxshadow:active {
+    transform: translateY(15px);
+    box-shadow: 0 10px 0 red, inset 0 -5px 5px #ee6767b6, 0 0 0 #808080e8,
+      0 0px 0px 20px white, 0 0 30px 30px #ff000088;
   }
 }

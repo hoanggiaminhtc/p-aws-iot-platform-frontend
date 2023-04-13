@@ -33,15 +33,16 @@ on:
 env:
   AWS_REGION: ap-southeast-1                   # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: iot_platform_frontend           # set this to your Amazon ECR repository name
-  ECS_SERVICE: iot-platform-frontend-develop                 # set this to your Amazon ECS service name
+  ECS_SERVICE: iot_platform_frontend                # set this to your Amazon ECS service name
   ECS_CLUSTER: iot-platform-frontend                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition/task-definition.json # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
+  # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: iot_platform_frontend           # set this to the name of the container in the
-                                               # containerDefinitions section of your task definition
+  # containerDefinitions section of your task definition
+  REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
+  REACT_APP_IOT_USER_TOKEN: TOKEN_USER
 
-permissions:
-  contents: read
+permissions: write-all
 
 jobs:
   # **************************************************
@@ -49,18 +50,8 @@ jobs:
   # **************************************************
   run-ci:
     # Run on github Ubuntu Linux VM
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/ci.yml
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'latest'
-      - run: npm ci
-        #     - name: Run test
-      # run: npm test
-      - run: npm run build --if-present
 
 
   # **************************************************
@@ -69,7 +60,8 @@ jobs:
   run-cd:
     # Depend on CI job
     needs: run-ci
-
+    if:
+      contains('refs/heads/develop', github.ref)
     name: Deploy
     runs-on: ubuntu-latest
     environment: develop
@@ -96,7 +88,6 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: ${{ github.sha }}
-        REACT_APP_API_ENDPOINT: ${{ secrets.REACT_APP_API_ENDPOINT }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can

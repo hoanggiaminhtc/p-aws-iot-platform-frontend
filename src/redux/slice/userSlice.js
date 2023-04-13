@@ -4,7 +4,7 @@ import {
   setTokenLocalStorage,
   deleteTokenLocalStorage,
 } from '~/util/handleLocalStorage';
-import { login, register, authentication } from '~/api/userApi';
+import { login, authentication } from '~/api/userApi';
 
 const initialState = {
   isLoading: false,
@@ -23,23 +23,12 @@ export const handleLogin = createAsyncThunk(
   },
 );
 
-export const handleRegister = createAsyncThunk(
-  'user/register',
-  async (body, { rejectWithValue }) => {
-    try {
-      const res = await register(body);
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
-    }
-  },
-);
-
 export const handleAuthentication = createAsyncThunk(
   'user/authentication',
   async (body, { rejectWithValue }) => {
     try {
       const res = await authentication();
+
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -68,22 +57,15 @@ export const userSlice = createSlice({
       state.user = {
         userName: action.payload.data.userName,
         avatarUrl: action.payload.data.avatarUrl,
+        role: action.payload.data.role,
       };
       setTokenLocalStorage(action.payload.data.token);
-      console.log('Login success');
-    });
-    builder.addCase(handleRegister.fulfilled, (state, action) => {
-      state.user = {
-        userName: action.payload.data.userName,
-        avatarUrl: action.payload.data.avatarUrl,
-      };
-      setTokenLocalStorage(action.payload.data.token);
-      console.log('Register success');
     });
     builder.addCase(handleAuthentication.fulfilled, (state, action) => {
       state.user = {
-        userName: action.payload.name,
-        avatarUrl: action.payload.avatarurl,
+        userName: action.payload.data.name,
+        avatarUrl: action.payload.data.avatarurl,
+        role: action.payload.data.role,
       };
     });
     builder.addMatcher(

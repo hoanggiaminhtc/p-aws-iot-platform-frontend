@@ -1,7 +1,6 @@
 import http from '~/util/http';
 
 export const addDashboard = (body) => {
-  console.log('Body Add dashboard : ', body);
   return http.post('/dashboard/add', body);
 };
 

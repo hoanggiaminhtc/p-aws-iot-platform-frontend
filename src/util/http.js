@@ -12,7 +12,11 @@ http.interceptors.request.use(
     if (
       config.url === '/auth/login' ||
       config.url === '/auth/register' ||
-      config.url === '/auth/forgetpassword'
+      config.url === '/auth/forgetpassword' ||
+      config.url.includes('/dashboard/getonewidget') ||
+      config.url.includes('/device/telemetry/getdevicedata') ||
+      config.url.includes('/device/telemetry/gettopicdata') ||
+      config.url.includes('/device/telemetry/getdatalastnday')
     ) {
       return config;
     } else {
@@ -39,7 +43,7 @@ http.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     if (error.response.data.message === 'jwt expired') {
-      window.location = 'http://localhost:3000/authentication';
+      window.location = `${window.location.origin}/authentication`;
     }
     return Promise.reject(error);
   },

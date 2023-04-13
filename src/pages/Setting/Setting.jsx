@@ -45,14 +45,17 @@ const Setting = () => {
   });
   return (
     <div>
-      <div className="boder-[#DEE5E7] border bg-[#f6f8f8] py-4 px-4 text-sm leading-[15px] text-black">
+      <div className=" bg-[#f6f8f8] py-4 px-4 text-sm leading-[15px] text-black dark:bg-[#202124] dark:text-white">
         Account Password
       </div>
-      <form className="bg-white px-4 pt-4 " onSubmit={formik.handleSubmit}>
+      <form
+        className="bg-white px-4 pt-4 dark:bg-[#202124]"
+        onSubmit={formik.handleSubmit}
+      >
         <div className="mb-6">
           <label
             htmlFor="oldPassword"
-            className="mb-2 block text-sm font-medium leading-5 text-[#58666e]"
+            className="mb-2 block text-sm font-medium leading-5 text-[#58666e] dark:text-white"
           >
             Current Password
           </label>
@@ -60,7 +63,7 @@ const Setting = () => {
             type="password"
             id="oldPassword"
             name="oldPassword"
-            className="block w-full border border-[#000A3D] bg-[#E8F0FE] p-2.5 text-sm text-black outline-none"
+            className="block w-full border border-[#000A3D] bg-[#E8F0FE] p-2.5 text-sm text-black outline-none dark:bg-black dark:text-white"
             placeholder="Enter your current password"
             autoComplete="off"
             value={formik.values.oldPassword}
@@ -75,7 +78,7 @@ const Setting = () => {
         <div className="mb-6">
           <label
             htmlFor="newPassword"
-            className="mb-2 block text-sm font-medium leading-5 text-[#58666e]"
+            className="mb-2 block text-sm font-medium leading-5 text-[#58666e] dark:text-white"
           >
             New Password
           </label>
@@ -84,7 +87,7 @@ const Setting = () => {
             id="newPassword"
             name="newPassword"
             placeholder="Enter your new password"
-            className="block w-full border  border-gray-300 bg-white p-2.5 text-sm text-gray-900 outline-none focus:border-[#000A3D] focus:ring-[#000A3D]"
+            className="block w-full border border-gray-300 bg-white  p-2.5 text-sm text-gray-900 outline-none focus:border-[#000A3D] focus:ring-[#000A3D] dark:bg-black dark:text-white"
             autoComplete="off"
             value={formik.values.newPassword}
             onChange={formik.handleChange}
@@ -98,7 +101,7 @@ const Setting = () => {
         <div className="mb-6">
           <label
             htmlFor="repeatPassword"
-            className="mb-2 block text-sm font-medium leading-5 text-[#58666e]"
+            className="mb-2 block text-sm font-medium leading-5 text-[#58666e] dark:text-white"
           >
             Repeat New Password
           </label>
@@ -107,7 +110,7 @@ const Setting = () => {
             id="repeatNewPassword"
             name="repeatNewPassword"
             placeholder="Repeat your new password"
-            className="block w-full border border-gray-300 bg-white p-2.5 text-sm text-gray-900 outline-none focus:border-[#000A3D] focus:ring-[#000A3D]"
+            className="block w-full border border-gray-300 bg-white p-2.5 text-sm text-gray-900 outline-none focus:border-[#000A3D] focus:ring-[#000A3D] dark:bg-black dark:text-white"
             autoComplete="off"
             value={formik.values.repeatNewPassword}
             onChange={formik.handleChange}

@@ -17,14 +17,15 @@ function App() {
     if (
       location.pathname === '/log-in' ||
       location.pathname === '/register' ||
-      location.pathname === '/authentication'
+      location.pathname === '/authentication' ||
+      location.pathname === '/lost-password' ||
+      location.pathname === '/health'
     ) {
       return;
     }
     dispatch(handleAuthentication())
       .unwrap()
       .catch((err) => {
-        console.log(err);
         if (
           err.message &&
           err.message !== 'jwt expired' &&
@@ -34,6 +35,13 @@ function App() {
         }
       });
   }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    const element = document.documentElement;
+    if (localStorage.getItem('theme')) {
+      element.classList.add('dark');
+    }
+  }, []);
 
   const handleErrAuthen = () => {
     dispatch(handleLogout());

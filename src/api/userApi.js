@@ -4,12 +4,8 @@ export const login = (body) => {
   return http.post('/auth/login', body);
 };
 
-export const register = (body) => {
-  return http.post('/auth/register', body);
-};
-
 export const forgetPassword = (email) => {
-  return http.post('/auth/forgetpassword', { email });
+  return http.post('/auth/resetpassword', { email });
 };
 
 export const changePassword = (body) => {

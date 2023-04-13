@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-
+import { forgetPassword } from '~/api/userApi';
 import BackgroundTitle from '~/assets/image/background_title.jpg';
 import Modal from '~/components/Modal';
 import Notification from '~/components/Notification';
-import Spinner from '~/components/UI/Spinner';
-import { forgetPassword } from '~/api/userApi';
 import Auth from '~/components/UI/Auth';
+import Spinner from '~/components/UI/Spinner';
 
 const LostPassword = () => {
   const [notificationSucess, setNotificationSucess] = useState(null);
@@ -51,7 +50,7 @@ const LostPassword = () => {
     <Auth>
       <div className="flex h-screen w-screen items-center justify-center bg-[#F0F3F4]">
         <form
-          className="w-full max-w-md rounded bg-white py-10 px-6"
+          className="w-full max-w-md rounded bg-white px-6 py-10"
           onSubmit={formik.handleSubmit}
         >
           <img
@@ -66,7 +65,7 @@ const LostPassword = () => {
             It happens to the best of us! Enter your email address to recive
             instructions on how to reset your password
           </p>
-          <div className="mb-6 mt-2">
+          <div className="mt-2 mb-6">
             <label
               htmlFor="email"
               className="mb-2 block text-base font-bold text-gray-900 "
@@ -96,12 +95,6 @@ const LostPassword = () => {
               <Spinner></Spinner>
             </div>
           )}
-          <div className="mt-6 text-center text-base">
-            Need an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Register
-            </a>
-          </div>
           <div className="mt-2 text-center text-base">
             Suddenly remembered?{' '}
             <a href="/log-in" className="text-blue-600 hover:underline">

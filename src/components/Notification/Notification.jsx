@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 
@@ -10,7 +9,7 @@ const Notification = ({
   handleClick,
 }) => {
   return (
-    <div className="flex w-full max-w-sm flex-col items-center rounded-md bg-white px-4 py-8">
+    <div className="flex w-auto max-w-sm flex-col items-center rounded-md bg-white px-4 py-8">
       <div>
         {success ? (
           <AiFillCheckCircle className="h-14 w-14 text-green-700" />

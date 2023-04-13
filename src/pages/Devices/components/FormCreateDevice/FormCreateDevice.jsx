@@ -14,13 +14,15 @@ import { addDevice } from '~/api/deviceApi';
 const OPTION_LIST_TYPE = [
   { name: "Choose a device's type", value: 'Default' },
   { name: 'Sensor', value: 'Sensor' },
-  { name: 'Circuit Board', value: 'CircuitBoard' },
-  { name: 'Engine', value: 'Engine' },
-  { name: 'Resistor', value: 'Resistor' },
+  { name: 'Light', value: 'Light' },
   { name: 'Other', value: 'Other' },
 ];
 
-const FormCreateDevice = ({ handleClickCLoseModal, handleAddSucess }) => {
+const FormCreateDevice = ({
+  handleClickCLoseModal,
+  handleAddSucess,
+  gatewayId,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
@@ -28,24 +30,33 @@ const FormCreateDevice = ({ handleClickCLoseModal, handleAddSucess }) => {
       deviceName: '',
       deviceDes: '',
       deviceType: 'Default',
+      serialnumberDevice: '',
     },
     validationSchema: Yup.object({
       deviceName: Yup.string().required("You must fill device's name"),
       deviceType: Yup.string().required("You must fill device's type"),
       deviceDes: Yup.string(),
+      serialnumberDevice: Yup.number().required(
+        "You must fill device's serial number",
+      ),
     }),
     onSubmit: (values) => {
       setIsLoading(true);
-      addDevice({
-        name: values.deviceName,
-        type: values.deviceType,
-        description: values.deviceDes,
-      })
+      addDevice(
+        {
+          name: values.deviceName,
+          type: values.deviceType,
+          description: values.deviceDes,
+          serialnumber: values.serialnumberDevice,
+        },
+        gatewayId,
+      )
         .then(() => {
           toast.success('Tạo thiết bị thành công!', {
             theme: 'colored',
           });
           handleAddSucess();
+          formik.handleReset();
         })
         .catch((err) => {
           toast.error('Tạo thiết bị thất bại!', {
@@ -55,8 +66,6 @@ const FormCreateDevice = ({ handleClickCLoseModal, handleAddSucess }) => {
         .finally(() => {
           setIsLoading(false);
         });
-      //Đây là xử lý tạo thiết bị
-      formik.handleReset();
     },
   });
 
@@ -68,11 +77,11 @@ const FormCreateDevice = ({ handleClickCLoseModal, handleAddSucess }) => {
   return (
     <Modal>
       <form
-        className="rounded-md bg-white pb-5 xs:w-[95%] sm:w-5/6 md:w-1/2"
+        className="rounded-md bg-white pb-5 dark:bg-[#202124] xs:w-[95%] sm:w-5/6 md:w-1/2 "
         onSubmit={formik.handleSubmit}
       >
         <div className="mb-8 flex h-16 items-center justify-between bg-[#132533] text-2xl font-bold text-white">
-          <div className="pl-6">Add new device</div>
+          <div className="pl-6">Device</div>
           <div className="cursor-pointer pr-6" onClick={clickCloseModal}>
             <AiOutlineClose />
           </div>
@@ -104,6 +113,20 @@ const FormCreateDevice = ({ handleClickCLoseModal, handleAddSucess }) => {
             error={formik.errors.deviceDes}
             touch={formik.touched.deviceDes}
           />
+          <InputForm
+            nameId="serialnumberDevice"
+            name="Device's serial number"
+            type="number"
+            value={formik.values.serialnumberDevice}
+            handleOnChange={formik.handleChange}
+            error={formik.errors.serialnumberDevice}
+            touch={formik.touched.serialnumberDevice}
+          />
+          <p className="mb-2 text-center text-red-600">
+            <span className="font-semibold text-red-700">Lưu ý: </span>Quá trình
+            này sẽ mất vài phút do phải tạo và thiết lập kết nối giữa gateway
+            với thiết bị!
+          </p>
           {!isLoading ? (
             <div className="flex items-center justify-end">
               <button

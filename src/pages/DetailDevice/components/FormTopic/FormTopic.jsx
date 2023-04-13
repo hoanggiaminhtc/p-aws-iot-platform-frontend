@@ -10,7 +10,7 @@ import Modal from '~/components/Modal';
 import InputForm from '~/components/UI/InputForm';
 import SpinnerEllipsis from '~/components/UI/SpinnerEllipsis';
 
-const FormTopic = ({ handleCloseModalTopic, idDevice }) => {
+const FormTopic = ({ handleCloseModalTopic, idDevice, gatewayId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
@@ -20,13 +20,14 @@ const FormTopic = ({ handleCloseModalTopic, idDevice }) => {
     validationSchema: Yup.object({
       topicName: Yup.string()
         .min(6, 'Your topic must be at least 6 characters')
-        .required("You must fill topic's name"),
+        .required("You must fill data stream's name"),
     }),
     onSubmit: (values) => {
       setIsLoading(true);
       addTopic({
         deviceId: idDevice,
         topicname: values.topicName,
+        gatewayId: gatewayId,
       })
         .then(() => {
           toast.success('Tạo topic thành công!', {
@@ -47,11 +48,11 @@ const FormTopic = ({ handleCloseModalTopic, idDevice }) => {
   return (
     <Modal>
       <form
-        className="w-1/2 rounded-md bg-white pb-5"
+        className="w-1/2 rounded-md bg-white pb-5 dark:bg-[#202124]"
         onSubmit={formik.handleSubmit}
       >
         <div className="mb-8 flex h-16 items-center justify-between bg-[#132533] text-2xl font-bold text-white">
-          <div className="pl-6">Add new topic</div>
+          <div className="pl-6">Data Stream</div>
           <div className="cursor-pointer pr-6" onClick={handleCloseModalTopic}>
             <AiOutlineClose />
           </div>
@@ -59,7 +60,7 @@ const FormTopic = ({ handleCloseModalTopic, idDevice }) => {
         <div className="px-6">
           <InputForm
             nameId="topicName"
-            name="Topic's name"
+            name="Data stream name"
             value={formik.values.topicName}
             handleOnChange={formik.handleChange}
             error={formik.errors.topicName}
@@ -71,7 +72,7 @@ const FormTopic = ({ handleCloseModalTopic, idDevice }) => {
                 type="submit"
                 className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto"
               >
-                Create a new topic
+                Create a new data stream
               </button>
               <button
                 type="button"

@@ -8,19 +8,21 @@ import PrivateRoute from './PrivateRoute';
 import NotificationAuthen from '~/pages/NotificationAuthen';
 import LogIn from '~/pages/LogIn';
 import LostPassword from '~/pages/LostPassword';
-import Register from '~/pages/Register';
 import GateWays from '~/pages/GateWays';
 import DeviceList from '~/pages/DeviceList';
+import HealthCheck from './HealthCheck';
+
 const Home = React.lazy(() => import('~/pages/Home'));
-const Devices = React.lazy(() => import('~/pages/Devices'));
 const DetailDevice = React.lazy(() => import('~/pages/DetailDevice'));
 const Dashboards = React.lazy(() => import('~/pages/Dashboards'));
 const DetailDashboards = React.lazy(() => import('~/pages/DetailDashboards'));
-// const DataBuckets = React.lazy(() => import('~/pages/DataBuckets'));
-// const Endpoints = React.lazy(() => import('~/pages/Endpoints'));
-// const Assets = React.lazy(() => import('~/pages/Assets'));
-// const Customers = React.lazy(() => import('~/pages/Customers'));
-const DetailCustomer = React.lazy(() => import('~/pages/DetailCustomer'));
+const ShareWidget = React.lazy(() => import('~/pages/ShareWidget'));
+const Customers = React.lazy(() => import('~/pages/Customers'));
+const ListCustomers = React.lazy(() => import('~/pages/ListCustomers'));
+const CustomerDevices = React.lazy(() => import('~/pages/CustomerDevices'));
+const CustomerDevice = React.lazy(() =>
+  import('~/pages/CustomerDevices/CustomerDevice'),
+);
 const Profile = React.lazy(() => import('~/pages/Profile'));
 const Setting = React.lazy(() => import('~/pages/Setting'));
 const Document = React.lazy(() => import('~/pages/Document'));
@@ -44,11 +46,6 @@ const MainRoutes = () => {
       isLayout: false,
     },
     {
-      path: '/register',
-      element: Register,
-      isLayout: false,
-    },
-    {
       path: '/gateways',
       element: GateWays,
       isLayout: true,
@@ -56,11 +53,6 @@ const MainRoutes = () => {
     {
       path: '/gateways/:id',
       element: DeviceList,
-      isLayout: true,
-    },
-    {
-      path: '/devices',
-      element: Devices,
       isLayout: true,
     },
     {
@@ -78,29 +70,29 @@ const MainRoutes = () => {
       element: DetailDashboards,
       isLayout: true,
     },
-    // {
-    //   path: '/data-buckets',
-    //   element: DataBuckets,
-    //   isLayout: true,
-    // },
-    // {
-    //   path: '/endpoints',
-    //   element: Endpoints,
-    //   isLayout: true,
-    // },
-    // {
-    //   path: '/assets',
-    //   element: Assets,
-    //   isLayout: true,
-    // },
-    // {
-    //   path: '/customers',
-    //   element: Customers,
-    //   isLayout: true,
-    // },
     {
-      path: '/customers/:id',
-      element: DetailCustomer,
+      path: '/share/:id',
+      element: ShareWidget,
+      isLayout: false,
+    },
+    {
+      path: '/customers',
+      element: Customers,
+      isLayout: true,
+    },
+    {
+      path: '/customers-list',
+      element: ListCustomers,
+      isLayout: true,
+    },
+    {
+      path: '/customer-gateways/:id',
+      element: CustomerDevices,
+      isLayout: true,
+    },
+    {
+      path: '/customer-devices/:id',
+      element: CustomerDevice,
       isLayout: true,
     },
     {
@@ -131,6 +123,7 @@ const MainRoutes = () => {
   ];
   return (
     <Routes>
+      <Route path="/health" element={<HealthCheck />}></Route>
       {routes.map((route, index) => {
         let Element = route.element;
         return (

@@ -7,7 +7,7 @@ import { getProfile, updateProfile } from '~/api/userApi';
 import NoneAvatar from '~/assets/image/none_avatar.png';
 import LoadingModal from '~/components/UI/LoadingModal';
 import Img from '~/components/UI/Img';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   updateProfile as updateProfileClient,
   handleLogout,
@@ -24,6 +24,7 @@ const Profile = () => {
   const [avatar, setAvatar] = useState('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { user: useRole } = useSelector((select) => select.user);
 
   let firstName = useMemo(() => {
     return user ? user.name.split(' ') : null;
@@ -73,20 +74,19 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!user) {
-      getProfile()
-        .then((data) => {
-          oldFileAvatar.current = data.data.data.user.avatarurl;
-          setAvatar(data.data.data.user.avatarurl || NoneAvatar);
-          formik.values.fullName = data.data.data.user.name;
-          setEmail(data.data.data.user.email);
-          setUser(data.data.data.user);
-        })
-        .catch((err) => {
-          toast.error('Lấy dữ liệu user thất bại');
-        });
-    }
-  }, [user, formik]);
+    getProfile()
+      .then((data) => {
+        oldFileAvatar.current = data.data.data.user.avatarurl;
+        setAvatar(data.data.data.user.avatarurl || NoneAvatar);
+        formik.values.fullName = data.data.data.user.name;
+        setEmail(data.data.data.user.email);
+        setUser(data.data.data.user);
+      })
+      .catch((err) => {
+        toast.error('Lấy dữ liệu user thất bại');
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleLogOut = (e) => {
     e.stopPropagation();
@@ -103,8 +103,8 @@ const Profile = () => {
   return (
     <div className="px-6">
       <form onSubmit={formik.handleSubmit} className="block">
-        <div className="border-b-2 md:flex">
-          <div className="w-full bg-white p-4 shadow-md sm:p-6 md:w-2/5 lg:p-8">
+        <div className="md:flex">
+          <div className="w-full bg-white p-4 shadow-md dark:bg-[#202124] dark:text-white sm:p-6 md:w-2/5 lg:p-8">
             <div className="flex justify-between">
               <span className="block text-xl font-semibold">
                 {firstName && firstName[firstName.length - 1]}
@@ -117,7 +117,9 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className="text-center text-gray-600">Administration</div>
+            <div className="text-center text-gray-600 dark:text-white">
+              {useRole?.role === 1 ? 'Administration' : 'User'}
+            </div>
             <div className="flex w-full justify-center p-8">
               <label htmlFor="avatar_user" className="cursor-pointer">
                 <div className="h-28 w-28 overflow-hidden rounded-full border border-gray-500 p-1">
@@ -133,20 +135,20 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="w-full bg-white p-8 shadow-md md:w-3/5 lg:ml-4">
-            <div className="rounded  p-6 shadow">
+          <div className="w-full bg-white p-8 shadow-md dark:bg-[#202124] md:w-3/5 lg:ml-4">
+            <div className="rounded p-6 shadow">
               <div className="pb-6">
                 <label
                   htmlFor="firstName"
-                  className="block pb-1 text-left font-semibold text-gray-700"
+                  className="block pb-1 text-left font-semibold text-gray-700 dark:text-white"
                 >
                   Full Name
                 </label>
-                <div className="flex">
+                <div className="flex border dark:border-white">
                   <input
                     id="fullName"
                     name="fullName"
-                    className="border-1  w-full rounded-r px-4 py-2"
+                    className="w-full rounded-r px-4 py-2 dark:border-white dark:bg-[#202124] dark:text-white"
                     type="text"
                     value={formik.values.fullName}
                     onChange={formik.handleChange}
@@ -158,17 +160,17 @@ const Profile = () => {
                   </p>
                 )}
               </div>
-              <div className="pb-4">
+              <div className="pb-4 dark:border-white">
                 <label
                   htmlFor="about"
-                  className="block pb-1 text-left font-semibold text-gray-700"
+                  className="block pb-1 text-left font-semibold text-gray-700 dark:text-white"
                 >
                   Email
                 </label>
                 <input
                   id="email"
                   name="email"
-                  className="border-1  pointer-events-none w-full cursor-default rounded-r bg-[#E8F0FE] px-4 py-2"
+                  className="pointer-events-none  w-full cursor-default rounded-r border bg-[#E8F0FE] px-4 py-2 dark:border-white dark:bg-[#202124] dark:text-white"
                   type="email"
                   value={email}
                   readOnly
