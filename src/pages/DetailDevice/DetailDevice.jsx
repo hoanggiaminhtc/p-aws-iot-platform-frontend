@@ -101,7 +101,7 @@ const DetailDevice = () => {
             infor: device.connectstatus,
             type: 'text',
             name: 'connectstatus',
-            color: device.connectstatus === 'Not Connected' ? 'red' : 'green',
+            color: device.connectstatus === 'Connected' ? 'green' : 'red',
           },
         ]);
       })
@@ -145,10 +145,10 @@ const DetailDevice = () => {
     setGateway(newGatewaySelect);
   };
 
-  const handleCheckGatewayRecognition = () => {
+  const handleCheckConnect = () => {
     setCheckGatewayRecognition(true);
-    getDeviceInfor(params.id);
     setTimeout(() => {
+      getDeviceInfor(params.id);
       setCheckGatewayRecognition(false);
     }, 3000);
   };
@@ -222,7 +222,7 @@ const DetailDevice = () => {
             </div>
             <div
               className="mb-4 cursor-pointer rounded-sm bg-[#D91E1E] px-5 py-2 text-center text-white hover:bg-[#d91e1eee] sm:mb-0 sm:mr-2 sm:w-auto"
-              onClick={handleCheckGatewayRecognition}
+              onClick={handleCheckConnect}
             >
               Check Connection
             </div>

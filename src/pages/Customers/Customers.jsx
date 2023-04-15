@@ -15,9 +15,9 @@ const Customers = () => {
   return (
     <div>
       <SideBarIntroduces
-        title="Customers"
-        content="Bring access to your customers to your IoT application. Create members, other developers, or domain administrators easily."
-        contentBtn="Create a Customer"
+        title="Khách hàng"
+        content="Mang lại quyền truy cập cho khách hàng vào ứng dụng IoT của bạn. Tạo thành viên, nhà phát triển khác hoặc quản trị viên miền một cách dễ dàng."
+        contentBtn="Tạo khách hàng"
         elementForm={FormCreateCustomer}
       />
     </div>
