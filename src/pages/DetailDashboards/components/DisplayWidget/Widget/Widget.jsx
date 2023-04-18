@@ -8,14 +8,14 @@ import Modal from '~/components/Modal/Modal';
 import Notification from '~/components/Notification/Notification';
 
 const Widget = ({
-                  type,
-                  name,
-                  deviceId,
-                  onHandleDeleteWidget,
-                  height,
-                  widgetId,
-                  unit,
-                }) => {
+  type,
+  name,
+  deviceId,
+  onHandleDeleteWidget,
+  height,
+  widgetId,
+  unit,
+}) => {
   let getDataWidget = useRef();
   const [data, setData] = useState(0);
   const [deviceName, setDeviceName] = useState('Device');
