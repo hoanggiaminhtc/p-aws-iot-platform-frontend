@@ -1,28 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import { getDevice } from '~/api/deviceApi';
-// getDataTopic,
+
 import { getDataLastNDay } from '~/api/telemetryApi';
 import LineChart from '~/components/Charts/LineChart';
 import DashBoardCart from '~/components/DashBoardCart';
-import DashBoardTable from '~/components/DashBoardTable';
 import Modal from '~/components/Modal/Modal';
 import Notification from '~/components/Notification/Notification';
 
-const SELECT_WIDGET = {
-  Card: DashBoardCart,
-  Table: DashBoardTable,
-  LineChart: LineChart,
-};
 const Widget = ({
-  type,
-  name,
-  deviceId,
-  onHandleDeleteWidget,
-  height,
-  widgetId,
-  unit,
-}) => {
-  const WidgetType = SELECT_WIDGET[type];
+                  type,
+                  name,
+                  deviceId,
+                  onHandleDeleteWidget,
+                  height,
+                  widgetId,
+                  unit,
+                }) => {
   let getDataWidget = useRef();
   const [data, setData] = useState(0);
   const [deviceName, setDeviceName] = useState('Device');
@@ -33,66 +26,74 @@ const Widget = ({
     if (getDataWidget.current) {
       clearInterval(getDataWidget.current);
     }
-    getDevice(deviceId).then((data) => {
-      setDeviceName(data.data.data.device.name);
-    });
-    switch (dataInTime) {
-      case '0':
-        getDataLastNDay({ deviceId: deviceId, date: 1800000 }).then((data) => {
-          dateOffset.current = 60 * 1000 * 5;
-          setData(data.data.data.telemetry.reverse());
-        });
-        getDataWidget.current = setInterval(() => {
-          getDataLastNDay({ deviceId: deviceId, date: 1800000 }).then(
-            (data) => {
-              setData(data.data.data.telemetry.reverse());
-            },
-          );
-        }, 2000);
-        break;
-      case '1h':
-        getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then((data) => {
-          dateOffset.current = 60 * 1000 * 15;
-          setData(data.data.data.telemetry.reverse());
-        });
-        getDataWidget.current = setInterval(() => {
+    if (!deviceId) {
+      getDevice(deviceId).then((data) => {
+        setDeviceName(data.data.data.device.name);
+      });
+    }
+    if (type === 'LineChart') {
+      switch (dataInTime) {
+        case '0':
+          getDataLastNDay({ deviceId: deviceId, date: 180000 }).then((data) => {
+            dateOffset.current = 60 * 1000 * 5;
+            setData(data.data.data.telemetry.reverse());
+          });
+          getDataWidget.current = setInterval(() => {
+            getDataLastNDay({ deviceId: deviceId, date: 180000 }).then(
+              (data) => {
+                setData(data.data.data.telemetry.reverse());
+              },
+            );
+          }, 180000);
+          break;
+        case '1h':
           getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
             (data) => {
+              dateOffset.current = 60 * 1000 * 15;
               setData(data.data.data.telemetry.reverse());
             },
           );
-        }, 3600000);
-        break;
-      case '1d':
-        getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then((data) => {
-          dateOffset.current = 60 * 1000 * 360;
-          setData(data.data.data.telemetry.reverse());
-        });
-        getDataWidget.current = setInterval(() => {
+          getDataWidget.current = setInterval(() => {
+            getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
+              (data) => {
+                setData(data.data.data.telemetry.reverse());
+              },
+            );
+          }, 3600000);
+          break;
+        case '1d':
           getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
             (data) => {
+              dateOffset.current = 60 * 1000 * 360;
               setData(data.data.data.telemetry.reverse());
             },
           );
-        }, 86400000);
-        break;
-      case '1w':
-        getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
-          (data) => {
-            dateOffset.current = 60 * 1000 * 2520;
-            setData(data.data.data.telemetry.reverse());
-          },
-        );
-        getDataWidget.current = setInterval(() => {
+          getDataWidget.current = setInterval(() => {
+            getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
+              (data) => {
+                setData(data.data.data.telemetry.reverse());
+              },
+            );
+          }, 86400000);
+          break;
+        case '1w':
           getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
             (data) => {
+              dateOffset.current = 60 * 1000 * 2520;
               setData(data.data.data.telemetry.reverse());
             },
           );
-        }, 604800000);
-        break;
-      default:
-        return;
+          getDataWidget.current = setInterval(() => {
+            getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
+              (data) => {
+                setData(data.data.data.telemetry.reverse());
+              },
+            );
+          }, 604800000);
+          break;
+        default:
+          return;
+      }
     }
     return () => {
       clearInterval(getDataWidget.current);
@@ -112,13 +113,18 @@ const Widget = ({
     <div
       className={`widget-block relative flex min-w-full items-center justify-center ${height} border-2 border-black p-2 dark:border-red-700 dark:bg-[#DEDFE1]`}
     >
-      <WidgetType
-        data={data}
-        name={name}
-        deviceName={deviceName}
-        dateOffset={dateOffset.current}
-        unit={unit}
-      />
+      {type === 'Card' ? (
+        <DashBoardCart name={name} unit={unit} deviceId={deviceId} />
+      ) : (
+        <LineChart
+          data={data}
+          name={name}
+          deviceName={deviceName}
+          dateOffset={dateOffset.current}
+          unit={unit}
+        />
+      )}
+
       <div className="absolute top-0 right-0 flex gap-1">
         <div
           // eslint-disable-next-line prettier/prettier
