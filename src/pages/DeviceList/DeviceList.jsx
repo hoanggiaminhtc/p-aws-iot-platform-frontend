@@ -243,13 +243,13 @@ const DeviceList = () => {
                 className="h-auto w-auto cursor-pointer rounded-sm bg-red-600 px-5 py-2 text-center text-white hover:bg-red-700"
                 onClick={handleCheckConnectionGateway}
               >
-                Check Connection Gateway
+                Check Connection
               </div>
               {checkConnection && (
                 <Modal>
                   <Spinner />
                   <div className="text-lg font-semibold text-white shadow-xl">
-                    Check Connection Gateway...
+                    Check Connection ...
                   </div>
                 </Modal>
               )}
