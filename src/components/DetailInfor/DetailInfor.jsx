@@ -1,14 +1,15 @@
+/* eslint-disable prettier/prettier */
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
 
 const DetailInfor = ({
-  indexInput,
-  title,
-  infor,
-  type,
-  handleChangeInput,
-  color,
-}) => {
+                       indexInput,
+                       title,
+                       infor,
+                       type,
+                       handleChangeInput,
+                       color,
+                     }) => {
   const handleCopy = (e) => {
     let topicTextCopy = e.currentTarget.nextElementSibling;
     let copyText = e.target.innerText;

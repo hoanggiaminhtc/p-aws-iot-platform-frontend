@@ -7,18 +7,9 @@ import { getDataLastNDay } from '~/api/telemetryApi';
 import { getOneWidget } from '~/api/widgetApi';
 import ButtonWidget from '~/components/ButtonWidget/ButtonWidget';
 import LineChart from '~/components/Charts/LineChart';
-// import DoughnutChart from '~/components/Charts/DoughnutChart';
-// import PieChart from '~/components/Charts/PieChart';
-// import VerticalBarChart from '~/components/Charts/VerticalBarChart';
-import DashBoardCart from '~/components/DashBoardCart';
-import DashBoardTable from '~/components/DashBoardTable';
-// import socketClient from '~/socketClient/socketClient';
 
-const SELECT_WIDGET = {
-  Card: DashBoardCart,
-  Table: DashBoardTable,
-  LineChart: LineChart,
-};
+import DashBoardCart from '~/components/DashBoardCart';
+
 const ShareWidget = () => {
   const params = useParams();
 
@@ -27,7 +18,6 @@ const ShareWidget = () => {
   const [deviceId, setDeviceId] = useState('');
   const dateOffset = useRef(60 * 1000 * 5);
 
-  const WidgetType = SELECT_WIDGET[type] || '';
   let getDataWidget = useRef();
   const [data, setData] = useState(0);
   const [deviceName, setDeviceName] = useState('Device');
@@ -38,77 +28,77 @@ const ShareWidget = () => {
       if (getDataWidget.current) {
         clearInterval(getDataWidget.current);
       }
-      getDevice(deviceId).then((data) => {
-        setDeviceName(data.data.data.device.name);
-      });
-      switch (dataInTime) {
-        case '0':
-          getDataLastNDay({ deviceId: deviceId, date: 1800000 }).then(
-            (data) => {
-              dateOffset.current = 60 * 1000 * 5;
-              setData(data.data.data.telemetry.reverse());
-            },
-          );
-          getDataWidget.current = setInterval(() => {
-            console.log('Case 0');
-            getDataLastNDay({ deviceId: deviceId, date: 1800000 }).then(
+      if (!deviceName) {
+        getDevice(deviceId).then((data) => {
+          setDeviceName(data.data.data.device.name);
+        });
+      }
+      if (type === 'LineChart') {
+        switch (dataInTime) {
+          case '0':
+            getDataLastNDay({ deviceId: deviceId, date: 180000 }).then(
               (data) => {
+                dateOffset.current = 60 * 1000 * 3;
                 setData(data.data.data.telemetry.reverse());
               },
             );
-          }, 2000);
-          break;
-        case '1h':
-          console.log('Case 1h');
-          getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
-            (data) => {
-              dateOffset.current = 60 * 1000 * 15;
-              setData(data.data.data.telemetry.reverse());
-            },
-          );
-          getDataWidget.current = setInterval(() => {
-            console.log('Case 1h');
+            getDataWidget.current = setInterval(() => {
+              getDataLastNDay({ deviceId: deviceId, date: 180000 }).then(
+                (data) => {
+                  setData(data.data.data.telemetry.reverse());
+                },
+              );
+            }, 180000);
+            break;
+          case '1h':
             getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
               (data) => {
+                dateOffset.current = 60 * 1000 * 15;
                 setData(data.data.data.telemetry.reverse());
               },
             );
-          }, 3600000);
-          break;
-        case '1d':
-          console.log('Case 1d');
-          getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
-            (data) => {
-              dateOffset.current = 60 * 1000 * 360;
-              setData(data.data.data.telemetry.reverse());
-            },
-          );
-          getDataWidget.current = setInterval(() => {
-            console.log('Case 1d');
+            getDataWidget.current = setInterval(() => {
+              console.log('Case 1h');
+              getDataLastNDay({ deviceId: deviceId, date: 3600000 }).then(
+                (data) => {
+                  setData(data.data.data.telemetry.reverse());
+                },
+              );
+            }, 3600000);
+            break;
+          case '1d':
             getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
               (data) => {
+                dateOffset.current = 60 * 1000 * 360;
                 setData(data.data.data.telemetry.reverse());
               },
             );
-          }, 86400000);
-          break;
-        case '1w':
-          getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
-            (data) => {
-              dateOffset.current = 60 * 1000 * 2520;
-              setData(data.data.data.telemetry.reverse());
-            },
-          );
-          getDataWidget.current = setInterval(() => {
+            getDataWidget.current = setInterval(() => {
+              getDataLastNDay({ deviceId: deviceId, date: 86400000 }).then(
+                (data) => {
+                  setData(data.data.data.telemetry.reverse());
+                },
+              );
+            }, 86400000);
+            break;
+          case '1w':
             getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
               (data) => {
+                dateOffset.current = 60 * 1000 * 2520;
                 setData(data.data.data.telemetry.reverse());
               },
             );
-          }, 604800000);
-          break;
-        default:
-          return;
+            getDataWidget.current = setInterval(() => {
+              getDataLastNDay({ deviceId: deviceId, date: 604800000 }).then(
+                (data) => {
+                  setData(data.data.data.telemetry.reverse());
+                },
+              );
+            }, 604800000);
+            break;
+          default:
+            return;
+        }
       }
     }
     return () => {
@@ -139,10 +129,12 @@ const ShareWidget = () => {
     <div
       className={`widget-block relative flex h-screen w-full items-center justify-center border-2 border-black p-2 dark:border-red-700 dark:bg-black`}
     >
-      {WidgetType === '' ? (
-        ''
-      ) : (
-        <WidgetType
+      {type === '' && ''}
+      {type === 'Card' && (
+        <DashBoardCart name={name} unit={unit} deviceId={deviceId} />
+      )}
+      {type === 'LineChart' && (
+        <LineChart
           data={data}
           name={name}
           deviceName={deviceName}

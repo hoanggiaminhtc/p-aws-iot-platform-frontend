@@ -36,7 +36,7 @@ const FormCreateDevice = ({
       deviceName: Yup.string().required("You must fill device's name"),
       deviceType: Yup.string().required("You must fill device's type"),
       deviceDes: Yup.string(),
-      serialnumberDevice: Yup.number().required(
+      serialnumberDevice: Yup.string().required(
         "You must fill device's serial number",
       ),
     }),
@@ -116,7 +116,6 @@ const FormCreateDevice = ({
           <InputForm
             nameId="serialnumberDevice"
             name="Device's serial number"
-            type="number"
             value={formik.values.serialnumberDevice}
             handleOnChange={formik.handleChange}
             error={formik.errors.serialnumberDevice}

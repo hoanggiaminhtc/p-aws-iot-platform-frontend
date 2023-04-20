@@ -31,8 +31,7 @@ const CustomerDevice = () => {
             <li>{new Date(device.createdAt).toLocaleDateString('en-GB')}</li>
             <li
               style={{
-                color:
-                  device.connectstatus === 'Not Connected' ? 'red' : 'green',
+                color: device.connectstatus === 'Connected' ? 'green' : 'red',
               }}
             >
               {device.connectstatus}
